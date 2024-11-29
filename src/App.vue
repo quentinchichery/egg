@@ -22,15 +22,31 @@
     </header>
 
     <main>
-      <div class="flex flex-col md:flex-row">
-        <div class="order-1 md:order-1 w-full md:w-64 p-4 md:sticky md:top-0">
-          <RestaurantFilterForm @filteredRestaurants="updatedRestaurants" />
+      <div class="app-container">
+        <ModalComponent v-if="isMobile" :isOpen="isFilterOpen" @close="closeFilter">
+          <FilterComponent @filteredRestaurants="updatedRestaurants" />
+        </ModalComponent>
+        <SidebarComponent v-if="!isMobile" class="sidebar" >
+          <FilterComponent @filteredRestaurants="updatedRestaurants" />
+        </SidebarComponent>
+        <div class="main-content">
+          <router-view style="padding-right: 10px; padding-left: 10px" :restaurants="restaurants"/>
         </div>
-        <div class="order-2 md:order-2 flex-1 p-4">
-          <router-view :restaurants="restaurants" />
-        </div>
+        <button v-if="isMobile" @click="openFilter" class="filter-button">Filter</button>
       </div>
+  
+  
 
+      <!-- <div class="fixed bottom-0 left-0 right-0 flex justify-center p-4 z-50">
+        <Button 
+        class="bg-blue-500 text-white px-4 py-2 rounded shadow-lg" 
+        @click="openModal"
+        >
+        Filtrer les adresses</Button>
+      </div>
+      <RestaurantFilterForm v-model:isOpen="isModalOpen" @filteredRestaurants="updatedRestaurants"></RestaurantFilterForm>
+      <router-view style="padding-right: 10px; padding-left: 10px" :restaurants="restaurants"/> -->
+    
     </main>
 
     <footer>
@@ -40,20 +56,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, provide } from 'vue';
+import FilterComponent from '@/components/FilterComponent.vue';
+import ModalComponent from '@/components/ModalComponent.vue';
+import SidebarComponent from '@/components/SidebarComponent.vue';
+import { ref, provide, onMounted, onBeforeUnmount } from 'vue';
 import Header from '@/components/Header.vue';
-import RestaurantFilterForm from '@/components/RestaurantFilterForm.vue';
+import { Button } from '@/components/ui/button'
 import Footer from '@/components/Footer.vue';
 import restaurantService from '@/api/restaurantService';
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 
@@ -65,6 +82,37 @@ function updatedRestaurants(newData) {
   restaurants.value = newData;
 }
 
+const isModalOpen = ref(false);
+const formData = ref(null);
+
+const openModal = () => {
+  isModalOpen.value = true;
+};
+
+const isFilterOpen = ref(false);
+const isMobile = ref(false);
+
+function openFilter() {
+  isFilterOpen.value = true;
+}
+
+function closeFilter() {
+  isFilterOpen.value = false;
+}
+
+function checkScreenSize() {
+  isMobile.value = window.innerWidth <= 768; // Adjust the breakpoint as needed
+}
+
+onMounted(() => {
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkScreenSize);
+});
+
 </script>
 
 <style>
@@ -75,5 +123,33 @@ a {
 #navigation {
   display: flex;
   justify-content: center;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+}
+
+.sidebar {
+  width: 250px; /* Adjust the width as needed */
+  background-color: #f8f9fa; /* Sidebar background color */
+  overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+.main-content {
+  flex-grow: 1; /* Take up the remaining space */
+  padding: 20px; /* Add some padding */
+}
+
+.filter-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>

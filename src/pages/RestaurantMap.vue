@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="map" style="height: 500px; width: 100%;"></div>
+    <div id="map" style="height: 500px; width: 100%;" class="z-0"></div>
   </div>
 </template>
 
@@ -61,18 +61,9 @@ function addMarkers() {
   markers.value = [];
   props.restaurants.forEach(restaurant => {
     if (restaurant.lat != null && restaurant.long != null) {
+      const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(restaurant.name)}`;
+      const popupContent = `<a href="${googleSearchUrl}" target="_blank">Search Google for ${restaurant.name}</a>`;
       const marker = L.marker([restaurant.lat, restaurant.long]).addTo(map.value);
-
-      // Create a link with an event listener for navigation
-      const popupContent = document.createElement('div');
-      popupContent.innerHTML = `<b>${restaurant.name}</b><br><a href="#" class="details-link">View Details</a>`;
-
-      // Add click event to the link to navigate to the details page
-      popupContent.querySelector('.details-link').addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent default link behavior
-        showRestaurantDetails(restaurant);
-      });
-
       marker.bindPopup(popupContent);
       markers.value.push(marker);
     }
@@ -82,10 +73,11 @@ function addMarkers() {
 const router = useRouter();
 
 const showRestaurantDetails = (restaurant) => {
-  router.push({
-    name: 'restaurant-details', // Ensure this route name matches your route definition
-    params: { id: restaurant.id }
-  });
+  // router.push({
+  //   name: 'restaurant-details', // Ensure this route name matches your route definition
+  //   params: { id: restaurant.id }
+  // });
+
 };
 
 onMounted(() => {

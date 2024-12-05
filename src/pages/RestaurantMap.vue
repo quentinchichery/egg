@@ -62,7 +62,14 @@ function addMarkers() {
   props.restaurants.forEach(restaurant => {
     if (restaurant.lat != null && restaurant.long != null) {
       const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(restaurant.name)}`;
-      const popupContent = `<a href="${googleSearchUrl}" target="_blank">Search Google for ${restaurant.name}</a>`;
+      const popupContent = `
+        <div class="custom-marker">
+          <div class="title">${restaurant.name}</h3>
+          <br>
+          <a href="${googleSearchUrl}" target="_blank">Lien Google</a>
+          <img src="restaurant_pictures/${restaurant.id}.jpg" class="popup-image"/>
+        </div>
+      `;
       const marker = L.marker([restaurant.lat, restaurant.long]).addTo(map.value);
       marker.bindPopup(popupContent);
       markers.value.push(marker);
@@ -84,3 +91,26 @@ onMounted(() => {
   initializeMap();
 });
 </script>
+
+<style scoped>
+.custom-marker {
+  width: 160px;
+  height: 145px;
+  overflow: hidden;
+  border: 1px solid black;
+}
+
+.custom-marker img {
+    width: 100%;
+    min-height: 100%;
+}
+
+.custom-marker .title {
+  margin-top: 5px;
+  font-size: 12px;
+  /* color: red; */
+  display:table-row;
+  height:1px;
+
+}
+</style>

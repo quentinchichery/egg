@@ -91,7 +91,7 @@
 
 </template>
 
-<script setup lang="ts">
+<script setup>
 import restaurantService from '@/api/restaurantService';
 import { ChevronDown } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
@@ -114,10 +114,17 @@ import { ref, computed } from 'vue';
 import { watch } from 'vue';
 
 
+
 const cities = [];
 restaurantService.localFetchCities().forEach((x, i) =>  cities.push({id: x, label: x}));
+
+// interface Craving {
+//   id: string;
+//   label: string;
+// }
 const cravings = [];
 restaurantService.localFetchCravings().forEach((x, i) =>  cravings.push({id: x, label: x}));
+
 const tags = [];
 restaurantService.localFetchTags().forEach((x, i) =>  tags.push({id: x, label: x}));
 
@@ -137,9 +144,10 @@ const { handleSubmit } = useForm({
 })
 
 const filteredRestaurants = ref([]);
-const emit = defineEmits('filteredRestaurants');
+const emit = defineEmits(['filteredRestaurants']);
 
 const restaurants = ref(restaurantService.localFetchRestaurants());
+
 
 const applyFilters = (values) => {
   filteredRestaurants.value = restaurants.value.filter(item => {

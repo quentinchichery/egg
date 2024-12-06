@@ -55,7 +55,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import FilterComponent from '@/components/FilterComponent.vue';
 import ModalComponent from '@/components/ModalComponent.vue';
 import SidebarComponent from '@/components/SidebarComponent.vue';

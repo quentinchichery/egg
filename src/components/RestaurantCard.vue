@@ -3,11 +3,11 @@
     <div class="caption">
       {{ restaurant.name }}
     </div>
-    <img :src="'restaurant_pictures/' + restaurant.id + '.jpg'"/>
+    <img :src="'/egg/restaurant_pictures/' + restaurant.id + '.jpg'"/>
   </div> 
 </template>
 
-<script setup lang="ts">
+<script setup>
 const props = defineProps({
   restaurant: Object,
 });

@@ -67,7 +67,7 @@ function addMarkers() {
           <div class="title">${restaurant.name}</h3>
           <br>
           <a href="${googleSearchUrl}" target="_blank">Lien Google</a>
-          <img src="restaurant_pictures/${restaurant.id}.jpg" class="popup-image"/>
+          <img src="/egg/restaurant_pictures/${restaurant.id}.jpg" class="popup-image"/>
         </div>
       `;
       const marker = L.marker([restaurant.lat, restaurant.long]).addTo(map.value);

@@ -10,5 +10,8 @@
 </script>
 
 <style scoped>
-/* Sidebar-specific styles go here */
+.sidebar {
+  display: flex;
+  justify-content: center;
+}
 </style>

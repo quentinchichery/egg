@@ -1,6 +1,6 @@
 <template>
   <div class=header>
-    <h1 id="header_title">potam-app</h1>
+    <h1 id="header_title">soft boiled egg club</h1>
     <p>nos adresses pariennes préférées</p>
   </div>
 </template>

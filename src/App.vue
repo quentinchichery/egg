@@ -34,18 +34,6 @@
         </div>
         <button v-if="isMobile" @click="openFilter" class="filter-button">Filter</button>
       </div>
-  
-  
-
-      <!-- <div class="fixed bottom-0 left-0 right-0 flex justify-center p-4 z-50">
-        <Button 
-        class="bg-blue-500 text-white px-4 py-2 rounded shadow-lg" 
-        @click="openModal"
-        >
-        Filtrer les adresses</Button>
-      </div>
-      <RestaurantFilterForm v-model:isOpen="isModalOpen" @filteredRestaurants="updatedRestaurants"></RestaurantFilterForm>
-      <router-view style="padding-right: 10px; padding-left: 10px" :restaurants="restaurants"/> -->
     
     </main>
 
@@ -65,12 +53,6 @@ import { Button } from '@/components/ui/button'
 import Footer from '@/components/Footer.vue';
 import restaurantService from '@/api/restaurantService';
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 
@@ -132,7 +114,6 @@ a {
 
 .sidebar {
   width: 250px; /* Adjust the width as needed */
-  background-color: #f8f9fa; /* Sidebar background color */
   overflow-y: auto; /* Enable scrolling if content overflows */
 }
 

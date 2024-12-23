@@ -1,9 +1,9 @@
 <template>
 
       <form @submit.prevent="onSubmit">
-        <div class="flex items-center space-x-4">
-          <span class="text-lg">Filtrer par envie</span>
-          <Button type="button" variant="outline" size="icon" @click="setContentCravings">
+        <div class="flex items-center space-x-4 w-full mt-3.5">
+          <span class="text-lg flex-1">Filtrer par envie</span>
+          <Button type="button" variant="ghost" size="icon" @click="setContentCravings">
             <ChevronDown class="w-4 h-4" />
           </Button>
         </div>
@@ -29,9 +29,10 @@
               </FormField>
               </ScrollArea>
             </div>
-        <div class="flex items-center space-x-4">
-          <span class="text-lg">Filtrer par quartiers</span>
-          <Button type="button" variant="outline" size="icon" @click="setContentCities">
+        <Separator class="my-4" />
+        <div class="flex items-center space-x-4 w-full">
+          <span class="text-lg flex-1">Filtrer par quartiers</span>
+          <Button type="button" variant="ghost" size="icon" @click="setContentCities">
             <ChevronDown class="w-4 h-4" />
           </Button>
         </div>
@@ -57,9 +58,10 @@
               </FormField>
             </ScrollArea>
         </div>
-        <div class="flex items-center space-x-4">
-          <span class="text-lg">Filtrer par tags</span>
-          <Button type="button" variant="outline" size="icon" @click="setContentTags">
+        <Separator class="my-4" />
+        <div class="flex items-center space-x-4 w-full">
+          <span class="text-lg flex-1">Filtrer par tags</span>
+          <Button type="button" variant="ghost" size="icon" @click="setContentTags">
             <ChevronDown class="w-4 h-4" />
           </Button>
         </div>
@@ -86,7 +88,10 @@
               </ScrollArea>
           </div>
         
-        <Button type="submit">Chercher</Button>
+        <div class="flex justify-center">
+          <Button class="mt-3.5" type="submit">Chercher</Button>
+        </div>
+
       </form>
 
 </template>
@@ -182,8 +187,6 @@ const setContentTags = () => {
 <style>
 
 
-form div {
-  margin-bottom: 10px;
-}
+
 
 </style>

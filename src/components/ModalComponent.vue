@@ -2,10 +2,12 @@
 <template>
   <div v-if="isOpen" class="modal-overlay" @click.self="closeModal">
     <div class="modal-content">
-
-        <slot></slot>
-        <Button type="button" @click="closeModal">Close</Button>
-
+        <div class="slot">
+          <slot></slot>
+        </div>
+        <div class="close">
+          <Button type="button" @click="closeModal">Close</Button>
+        </div>
     </div>
   </div>
 
@@ -47,6 +49,16 @@ function closeModal() {
   overflow-y: auto; /* Enable vertical scrolling */
   width: 90%; /* Adjust width as needed */
   max-width: 500px; /* Set a maximum width */
+}
+
+.slot {
+  display: flex;
+  justify-content: center;
+}
+
+.close {
+  display: flex;
+  justify-content: center;
 }
 
 </style>

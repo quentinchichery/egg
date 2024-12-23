@@ -8,15 +8,14 @@
 import { onMounted, ref, watch } from 'vue';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useRouter } from 'vue-router';
 
-// Configure Leaflet icon URLs
-// delete L.Icon.Default.prototype._getIconUrl;
-// L.Icon.Default.mergeOptions({
-//   iconRetinaUrl: 'leaflet/dist/images/marker-icon-2x.png',
-//   iconUrl: 'leaflet/dist/images/marker-icon.png',
-//   shadowUrl: 'leaflet/dist/images/marker-shadow.png',
-// });
+
+const markerIcon = L.icon({
+  iconSize: [30, 30],
+  iconAnchor: [9, 9],
+  popupAnchor: [0, 0],
+  iconUrl: '/egg/location.png',
+});
 
 // Props
 const props = defineProps({
@@ -61,31 +60,32 @@ function addMarkers() {
   markers.value = [];
   props.restaurants.forEach(restaurant => {
     if (restaurant.lat != null && restaurant.long != null) {
-      const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(restaurant.name)}`;
+      const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(restaurant.name)}+${encodeURIComponent(restaurant.addresse)}`;
       const popupContent = `
         <div class="custom-marker">
-          <div class="title">${restaurant.name}</h3>
-          <br>
-          <a href="${googleSearchUrl}" target="_blank">Lien Google</a>
+          <div class="title">${restaurant.name}</div>
           <img src="/egg/restaurant_pictures/${restaurant.id}.jpg" class="popup-image"/>
         </div>
       `;
-      const marker = L.marker([restaurant.lat, restaurant.long]).addTo(map.value);
+      const marker = L.marker([restaurant.lat, restaurant.long], {icon : markerIcon}).addTo(map.value);
       marker.bindPopup(popupContent);
+      // Add event listener to make the popup clickable
+      marker.on('popupopen', e => {
+        const popupNode = e.popup.getElement();
+        const contentNode = popupNode.querySelector('.custom-marker');
+        if (contentNode) {
+          contentNode.addEventListener('click', () => {
+            window.open(googleSearchUrl, '_blank');
+          });
+        }
+      });
+      // Add marker to the array
       markers.value.push(marker);
     }
   });
 }
-
-const router = useRouter();
-
-const showRestaurantDetails = (restaurant) => {
-  // router.push({
-  //   name: 'restaurant-details', // Ensure this route name matches your route definition
-  //   params: { id: restaurant.id }
-  // });
-
-};
+          // <br>
+          // <a href="${googleSearchUrl}" target="_blank">Lien Google</a>
 
 onMounted(() => {
   initializeMap();
@@ -93,24 +93,36 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.custom-marker {
-  width: 160px;
-  height: 145px;
-  overflow: hidden;
-  border: 1px solid black;
+:deep(.custom-marker) {
+  width: 200px; /* Make the popup take all available width */
+  height: 250px; /* Make the popup take all available height */
+  display: flex; /* Flexbox to help align children */
+  justify-content: center; /* Center title horizontally */
+  align-items: center; /* Center title vertically */
+  position: relative; /* Positioning context for the title */
+  overflow: hidden; /* Ensure no content spills outside */
+  cursor: pointer; /* Indicate interactivity */
+  background-color: black; /* Fallback background in case the image fails to load */
 }
 
-.custom-marker img {
-    width: 100%;
-    min-height: 100%;
+:deep(.custom-marker img) {
+  position: absolute; /* Fill the parent container */
+  top: 0;
+  left: 0;
+  width: 100%; /* Stretch the image to full width */
+  height: 100%; /* Stretch the image to full height */
+  object-fit: cover; /* Ensure the image covers the container */
+  z-index: 1; /* Place the image behind the title */
 }
 
-.custom-marker .title {
-  margin-top: 5px;
-  font-size: 12px;
-  /* color: red; */
-  display:table-row;
-  height:1px;
-
+:deep(.title) {
+  position: absolute; /* Overlay the title on top of the image */
+  z-index: 2; /* Ensure the title is above the image */
+  color: white;
+  font-weight: bold;
+  background-color: #454545; 
+  text-align: center; /* Center text horizontally */
 }
+
+
 </style>

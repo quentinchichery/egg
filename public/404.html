@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; URL=/" />
+    <meta http-equiv="refresh" content="0; URL=/egg/" />
   </head>
   <body>
     <script>
       // Redirect to the base index.html, but retain the original path for the client-side router
-      window.location.replace('/');
+      window.location.replace('/egg' + window.location.pathname.replace(/^\/egg/, ''));
     </script>
   </body>
 </html>

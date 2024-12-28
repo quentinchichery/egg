@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; URL=/egg/" />
+    <meta charset="UTF-8" />
+    <title>Redirecting...</title>
+    <script>
+      // Redirect unmatched paths to /egg/index.html while retaining the route
+      var pathname = window.location.pathname;
+      if (!pathname.startsWith('/egg')) {
+        window.location.replace('/egg' + pathname);
+      } else {
+        window.location.replace('/egg/');
+      }
+    </script>
   </head>
   <body>
-    <script>
-      // Redirect to the base index.html, but retain the original path for the client-side router
-      window.location.replace('/egg' + window.location.pathname.replace(/^\/egg/, ''));
-    </script>
+    Redirecting...
   </body>
 </html>

@@ -9,10 +9,9 @@ import { onMounted, ref, watch } from 'vue';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-
 const markerIcon = L.icon({
   iconSize: [30, 30],
-  iconAnchor: [9, 9],
+  iconAnchor: [15, 30],
   popupAnchor: [0, 0],
   iconUrl: '/egg/location.png',
 });
@@ -20,7 +19,7 @@ const markerIcon = L.icon({
 // Props
 const props = defineProps({
   restaurants: {
-    type: Object,
+    type: Array,
     required: true
   }
 });
@@ -31,15 +30,27 @@ const selectedRestaurant = ref(null);
 const markers = ref([]);
 const center = [48.8566, 2.3522];
 const zoom = 12;
+const markersLayer = ref(null); // LayerGroup for markers
 
-// Watchers
+// Watch for changes in restaurants and reinitialize the map
 watch(
   () => props.restaurants,
   () => {
-    if (map.value) addMarkers(); // Check if map is initialized
+    if (map.value) {
+      reinitializeMap(); // Reinitialize map on filtering
+    }
   },
   { immediate: true }
 );
+
+// Function to reinitialize the map
+const reinitializeMap = () => {
+  if (map.value) {
+    map.value.remove(); // Completely destroy the map instance
+    map.value = null;
+  }
+  initializeMap(); // Recreate the map
+};
 
 // Function to initialize map and add markers
 const initializeMap = () => {
@@ -52,12 +63,17 @@ const initializeMap = () => {
   addMarkers();
 };
 
-// Methods
-function addMarkers() {
-  if (Array.isArray(markers.value) && markers.value.length) {
-    markers.value.forEach(marker => map.value.removeLayer(marker));
+// Function to add markers
+const addMarkers = () => {
+  if (!map.value) return;
+
+  // Remove previous marker layer
+  if (markersLayer.value) {
+    markersLayer.value.clearLayers();
+  } else {
+    markersLayer.value = L.layerGroup().addTo(map.value);
   }
-  markers.value = [];
+
   props.restaurants.forEach(restaurant => {
     if (restaurant.lat != null && restaurant.long != null) {
       const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(restaurant.name)}+${encodeURIComponent(restaurant.addresse)}`;
@@ -123,6 +139,4 @@ onMounted(() => {
   background-color: #454545; 
   text-align: center; /* Center text horizontally */
 }
-
-
 </style>

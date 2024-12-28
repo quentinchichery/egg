@@ -1,29 +1,11 @@
 <script setup>
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import { useRouter } from 'vue-router';
 import RestaurantCard from '@/components/RestaurantCard.vue';
-
 
 defineProps({
   restaurants: Array,
 })
-
-const router = useRouter();
-
-const showRestaurantDetails = (restaurant) => {
-  router.push({
-    name: 'restaurant-details', // Ensure this route name matches your route definition
-    params: { id: restaurant.id }
-  });
-};
 </script>
 
 <template>

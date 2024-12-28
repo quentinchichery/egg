@@ -12,12 +12,10 @@ const props = defineProps({
   restaurant: Object,
 });
 
-
 function navigateToLink(restaurant) {
   const fullUrl = `https://www.google.com/search?q=${encodeURIComponent(restaurant.name)}+${encodeURIComponent(restaurant.addresse)}`;
   window.open(fullUrl, '_blank');
 }
-
 </script>
 
 <style scoped>

@@ -34,7 +34,6 @@
         </div>
         <button v-if="isMobile" @click="openFilter" class="filter-button">Filter</button>
       </div>
-    
     </main>
 
     <footer>
@@ -109,7 +108,6 @@ a {
 
 .app-container {
   display: flex;
-  height: 100vh; /* Full viewport height */
 }
 
 .sidebar {

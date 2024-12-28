@@ -4,13 +4,7 @@
     <meta charset="UTF-8" />
     <title>Redirecting...</title>
     <script>
-      // Redirect unmatched paths to /egg/index.html while retaining the route
-      var pathname = window.location.pathname;
-      if (!pathname.startsWith('/egg')) {
-        window.location.replace('/egg' + pathname);
-      } else {
-        window.location.replace('/egg/');
-      }
+      window.location.replace('/egg/');
     </script>
   </head>
   <body>

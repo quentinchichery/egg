@@ -3,22 +3,18 @@
   <div id="app">
     <header>
       <Header/>
-      <div id="navigation">
-        <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <router-link to="/grid">
-                <NavigationMenuLink :class="navigationMenuTriggerStyle()">Grille</NavigationMenuLink>
-              </router-link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <router-link to="/map">
-                <NavigationMenuLink :class="navigationMenuTriggerStyle()">Carte</NavigationMenuLink>
-              </router-link>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
-      </div>
+        <div id="navigation" class="flex space-x-4">
+          <router-link to="/grid" class="router-link">
+            <Button :variant="getButtonVariant('/grid')">
+              <MapPinned class="w-4 h-4 mr-2" /> Grille
+            </Button>
+          </router-link>
+          <router-link to="/map" class="router-link">
+            <Button :variant="getButtonVariant('/map')">
+              <LayoutGrid class="w-4 h-4 mr-2" /> Carte
+            </Button>
+          </router-link>
+        </div>
     </header>
 
     <main>
@@ -32,7 +28,9 @@
         <div class="main-content">
           <router-view style="padding-right: 10px; padding-left: 10px" :restaurants="restaurants"/>
         </div>
-        <button v-if="isMobile" @click="openFilter" class="filter-button">Filter</button>
+        <Button v-if="isMobile" @click="openFilter" class="filter-button">
+          <Filter class="w-4 h-4 mr-2"/> Filter
+        </Button>
       </div>
     </main>
 
@@ -54,6 +52,18 @@ import restaurantService from '@/api/restaurantService';
 import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
+import { MapPinned } from 'lucide-vue-next';
+import { LayoutGrid } from 'lucide-vue-next';
+import { Filter } from 'lucide-vue-next';
+import { useRoute } from 'vue-router';
+
+// Access the current route
+const route = useRoute();
+
+// Function to determine the button variant
+const getButtonVariant = (targetPath) => {
+  return route.path === targetPath ? 'default' : 'outline';
+};
 
 // Initialize reactive data
 const restaurants = ref(restaurantService.localFetchRestaurants());
@@ -121,14 +131,15 @@ a {
 }
 
 .filter-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  position: fixed; /* Keep the button fixed at the bottom of the screen */
+  bottom: 20px; /* Distance from the bottom */
+  left: 50%; /* Position the button's left edge at the horizontal center */
+  transform: translateX(-50%); /* Shift the button back by half its width to center it */
+  width: 80%; /* Make the button take up 80% of the available width */
+  max-width: 400px; /* Optional: Limit the maximum width to keep it visually appealing */
+  padding: 10px 20px; /* Adjust for desired button size */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Round the corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
 }
 </style>

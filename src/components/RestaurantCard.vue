@@ -3,7 +3,7 @@
     <div class="caption">
       {{ restaurant.name }}
     </div>
-    <img :src="'/egg/restaurant_pictures/' + restaurant.id + '.jpg'"/>
+    <img :src="'restaurant_pictures/' + restaurant.id + '.jpg'"/>
   </div> 
 </template>
 

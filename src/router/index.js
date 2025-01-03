@@ -3,7 +3,7 @@ import RestaurantGrid from '@/pages/RestaurantGrid.vue';
 import RestaurantMap from '@/pages/RestaurantMap.vue';
 
 const router = createRouter({
-  history: createWebHistory('/egg/'),
+  history: createWebHistory('/'),
   routes: [
     {
       path: '/grid',

@@ -13,7 +13,7 @@ const markerIcon = L.icon({
   iconSize: [30, 30],
   iconAnchor: [15, 30],
   popupAnchor: [0, 0],
-  iconUrl: '/egg/location.png',
+  iconUrl: 'location.png',
 });
 
 // Props
@@ -80,7 +80,7 @@ const addMarkers = () => {
       const popupContent = `
         <div class="custom-marker">
           <div class="title">${restaurant.name}</div>
-          <img src="/egg/restaurant_pictures/${restaurant.id}.jpg" class="popup-image"/>
+          <img src="restaurant_pictures/${restaurant.id}.jpg" class="popup-image"/>
         </div>
       `;
       const marker = L.marker([restaurant.lat, restaurant.long], {icon : markerIcon}).addTo(map.value);

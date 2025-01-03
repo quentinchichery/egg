@@ -6,12 +6,12 @@
         <div id="navigation" class="flex space-x-4">
           <router-link to="/grid" class="router-link">
             <Button :variant="getButtonVariant('/grid')">
-              <MapPinned class="w-4 h-4 mr-2" /> Grille
+              <LayoutGrid class="w-4 h-4 mr-2" /> Grille
             </Button>
           </router-link>
           <router-link to="/map" class="router-link">
             <Button :variant="getButtonVariant('/map')">
-              <LayoutGrid class="w-4 h-4 mr-2" /> Carte
+              <MapPinned class="w-4 h-4 mr-2" /> Carte
             </Button>
           </router-link>
         </div>

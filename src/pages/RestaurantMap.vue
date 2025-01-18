@@ -9,12 +9,15 @@ import { onMounted, ref, watch } from 'vue';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const markerIcon = L.icon({
-  iconSize: [30, 30],
-  iconAnchor: [15, 30],
-  popupAnchor: [0, 0],
-  iconUrl: 'location.png',
-});
+// Map cravings to icons
+const cravingIcons = {
+  cafe: 'map_icons/local_cafe_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
+  bar: 'map_icons/wine_bar_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
+  commerce: 'map_icons/storefront_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
+  table: 'map_icons/restaurant_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
+  pouce: 'map_icons/lunch_dining_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
+  default: 'map_icons/location.png',
+};
 
 // Props
 const props = defineProps({
@@ -76,6 +79,22 @@ const addMarkers = () => {
 
   props.restaurants.forEach(restaurant => {
     if (restaurant.lat != null && restaurant.long != null) {
+      const iconHtml = `
+        <div class="custom-marker-icon">
+          <div class="icon-circle">
+            <img src="${cravingIcons[restaurant.craving] || cravingIcons.default}" alt="${restaurant.craving}" />
+          </div>
+        </div>
+      `;
+
+      const markerIcon = L.divIcon({
+        className: '', // Clear default styling
+        html: iconHtml,
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -40],
+      });
+
       const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(restaurant.name)}+${encodeURIComponent(restaurant.addresse)}`;
       const popupContent = `
         <div class="custom-marker">
@@ -138,5 +157,23 @@ onMounted(() => {
   font-weight: bold;
   background-color: #454545; 
   text-align: center; /* Center text horizontally */
+}
+
+:deep(.custom-marker-icon .icon-circle) {
+  width: 40px; /* Diameter of the circle */
+  height: 40px;
+  background-color: white; /* White background */
+  border-radius: 50%; /* Makes it a circle */
+  display: flex; /* Center the icon */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Optional shadow for a nicer effect */
+  border: 2px solid #cccccc; /* Optional border */
+}
+
+:deep(.custom-marker-icon .icon-circle img) {
+  width: 60%; /* Resize the PNG icon */
+  height: 60%;
+  object-fit: contain; /* Ensure the image fits inside */
 }
 </style>

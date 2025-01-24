@@ -1,17 +1,28 @@
-import restaurants from './data-20241118.json';
-import filters from './cities-cravings-tags.json';
+import cravings from '@/data/cravings.json';
+import cities from '@/data/cities.json';
+import tags from '@/data/tags.json';
+import restaurants from '@/data/restaurants.json';
 
 export default {
   localFetchRestaurants() {
     return restaurants;
   },
   localFetchCravings() {
-    return filters.cravings
+    return Object.entries(cravings).map(([id, name]) => ({
+      id: id,
+      label: name,
+    }));
   },
   localFetchTags() {
-    return filters.tags
+    return Object.entries(tags).map(([id, name]) => ({
+      id: id,
+      label: name,
+    }));
   },
   localFetchCities() {
-    return filters.cities.sort((a, b) => a - b);
-  }
+    return Object.entries(cities).map(([zip, name]) => ({
+      id: zip,
+      label: name,
+    }));
+  },
 };

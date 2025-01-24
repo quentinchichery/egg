@@ -90,9 +90,9 @@ const addMarkers = () => {
       const markerIcon = L.divIcon({
         className: '', // Clear default styling
         html: iconHtml,
-        iconSize: [40, 40],
-        iconAnchor: [20, 40],
-        popupAnchor: [0, -40],
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30],
       });
 
       const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(restaurant.name)}+${encodeURIComponent(restaurant.addresse)}`;
@@ -160,8 +160,8 @@ onMounted(() => {
 }
 
 :deep(.custom-marker-icon .icon-circle) {
-  width: 40px; /* Diameter of the circle */
-  height: 40px;
+  width: 30px; /* Diameter of the circle */
+  height: 30px;
   background-color: white; /* White background */
   border-radius: 50%; /* Makes it a circle */
   display: flex; /* Center the icon */

@@ -1,95 +1,122 @@
 <template>
-
       <form @submit.prevent="onSubmit">
-        <div class="flex items-center space-x-4 w-full mt-3.5">
-          <span class="text-lg flex-1">Filtrer par envie</span>
+        <div class="flex items-center space-x-4 w-full">
+          <span class="text-lg font-bold flex-1 pl-4">Types</span>
           <Button type="button" variant="ghost" size="icon" @click="setContentCravings">
             <ChevronDown class="w-4 h-4" />
           </Button>
         </div>
           <div v-show='contentVisibleCravings'>
-            <ScrollArea class="h-28 rounded-md ">
-              <FormField name="cravings">
-                <FormItem >
-                    <FormField v-for="craving in cravings" v-slot="{ value, handleChange }" :key="craving.id" type="checkbox" :value="craving.id" :unchecked-value="false" name="cravings">
-                      <FormItem class="flex flex-row items-start space-x-3 space-y-0">
-                        <FormControl>
-                          <Checkbox
-                            :checked="value.includes(craving.id)"
-                            @update:checked="handleChange"
-                          />
-                        </FormControl>
-                        <FormLabel class="font-normal">
-                          {{ craving.label }}
-                        </FormLabel>
-                      </FormItem>
-                    </FormField>
-                  <FormMessage />
-                </FormItem>
-              </FormField>
-              </ScrollArea>
-            </div>
+            <FormField name="cravings">
+              <FormItem>
+                <div class="flex flex-wrap justify-center space-x-1 space-y-1">
+                  <FormField
+                    v-for="craving in cravings"
+                    v-slot="{ value, handleChange }"
+                    :key="craving.id"
+                    type="checkbox"
+                    :value="craving.id"
+                    :unchecked-value="false"
+                    name="cravings"
+                  >
+                    <FormItem class="flex flex-row items-center space-x-3">
+                      <FormControl>
+                        <Toggle
+                          :pressed="value.includes(craving.id)"
+                          @update:pressed="handleChange"
+                        >
+                        <div class="flex items-center space-x-2 font-normal">
+                          <img :src="getIconForCraving(craving.id)" alt="" class="w-5 h-5" />
+                          <span>{{ craving.label }}</span>
+                        </div>
+                        </Toggle>
+                      </FormControl>
+                    </FormItem>
+                  </FormField>
+                </div>
+              </FormItem>
+            </FormField>
+          </div>
         <Separator class="my-4" />
         <div class="flex items-center space-x-4 w-full">
-          <span class="text-lg flex-1">Filtrer par quartiers</span>
+          <span class="text-lg font-bold flex-1 pl-4">Quartiers</span>
           <Button type="button" variant="ghost" size="icon" @click="setContentCities">
             <ChevronDown class="w-4 h-4" />
           </Button>
         </div>
           <div v-show='contentVisibleCities'>
-            <ScrollArea class="h-28 rounded-md ">
-              <FormField name="cities">
-                <FormItem>
-                    <FormField v-for="city in cities" v-slot="{ value, handleChange }" :key="city.id" type="checkbox" :value="city.id" :unchecked-value="false" name="cities">
-                      <FormItem class="flex flex-row items-start space-x-3 space-y-0">
-                        <FormControl>
-                          <Checkbox
-                            :checked="value.includes(city.id)"
-                            @update:checked="handleChange"
-                          />
-                        </FormControl>
-                        <FormLabel class="font-normal">
-                          {{ city.label }}
-                        </FormLabel>
-                      </FormItem>
-                    </FormField>
-                  <FormMessage />
-                </FormItem>
-              </FormField>
-            </ScrollArea>
+            <FormField name="cities">
+              <FormItem>
+                <div class="flex flex-wrap justify-center space-x-1 space-y-1">
+                  <FormField
+                    v-for="city in cities"
+                    v-slot="{ value, handleChange }"
+                    :key="city.id"
+                    type="checkbox"
+                    :value="city.id"
+                    :unchecked-value="false"
+                    name="cities"
+                  >
+                    <FormItem class="flex flex-row items-center space-x-3">
+                      <FormControl>
+                        <Toggle
+                          :pressed="value.includes(city.id)"
+                          @update:pressed="handleChange"
+                        >
+                        <div class="flex items-center space-x-2 font-normal">
+                          <span>{{ city.label }}</span>
+                        </div>
+                        </Toggle>
+                      </FormControl>
+                    </FormItem>
+                  </FormField>
+                </div>
+              </FormItem>
+            </FormField>
         </div>
         <Separator class="my-4" />
         <div class="flex items-center space-x-4 w-full">
-          <span class="text-lg flex-1">Filtrer par tags</span>
+          <span class="text-lg font-bold flex-1 pl-4">Envies</span>
           <Button type="button" variant="ghost" size="icon" @click="setContentTags">
             <ChevronDown class="w-4 h-4" />
           </Button>
         </div>
           <div v-show='contentVisibleTags'>
-            <ScrollArea class="h-28 rounded-md ">
+           <ScrollArea class="h-28 rounded-md " type="always">
               <FormField name="tags">
                 <FormItem>
-                    <FormField v-for="tag in tags" v-slot="{ value, handleChange }" :key="tag.id" type="checkbox" :value="tag.id" :unchecked-value="false" name="tags">
-                      <FormItem class="flex flex-row items-start space-x-3 space-y-0">
+                  <div class="flex flex-wrap justify-center space-x-1 space-y-1">
+                    <FormField
+                      v-for="tag in tags"
+                      v-slot="{ value, handleChange }"
+                      :key="tag.id"
+                      type="checkbox"
+                      :value="tag.id"
+                      :unchecked-value="false"
+                      name="tags"
+                    >
+                      <FormItem class="flex flex-row items-center space-x-3">
                         <FormControl>
-                          <Checkbox
-                            :checked="value.includes(tag.id)"
-                            @update:checked="handleChange"
-                          />
+                          <Toggle
+                            :pressed="value.includes(tag.id)"
+                            @update:pressed="handleChange"
+                          >
+                          <div class="flex items-center space-x-2 font-normal">
+                            <span>{{ tag.label }}</span>
+                          </div>
+                          </Toggle>
                         </FormControl>
-                        <FormLabel class="font-normal">
-                          {{ tag.label }}
-                        </FormLabel>
                       </FormItem>
                     </FormField>
-                  <FormMessage />
+                  </div>
                 </FormItem>
               </FormField>
-              </ScrollArea>
+            </ScrollArea>
           </div>
         
-        <div class="flex justify-center">
-          <Button class="mt-3.5" type="submit">Chercher</Button>
+        <div class="flex items-center justify-between w-full">
+          <Button class="mt-3.5 ml-2" variant="ghost" @click="resetToggles">Effacer</Button>
+          <Button class="mt-3.5 mr-2" type="submit">Chercher</Button>
         </div>
 
       </form>
@@ -98,9 +125,9 @@
 
 <script setup>
 import restaurantService from '@/api/restaurantService';
-import { ChevronDown } from 'lucide-vue-next'
-import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
+import { ChevronDown } from 'lucide-vue-next';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   FormControl,
   FormDescription,
@@ -108,38 +135,30 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Separator } from '@/components/ui/separator'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { toTypedSchema } from '@vee-validate/zod'
-import { useForm } from 'vee-validate'
-import { h } from 'vue'
-import * as z from 'zod'
+} from '@/components/ui/form';
+import { Toggle } from '@/components/ui/toggle';
+import { Separator } from '@/components/ui/separator';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { toTypedSchema } from '@vee-validate/zod';
+import { useForm } from 'vee-validate';
+import { h } from 'vue';
+import * as z from 'zod';
 import { ref, computed } from 'vue';
 import { watch } from 'vue';
 
+const cravings = restaurantService.localFetchCravings();
+const cities = restaurantService.localFetchCities();
+const tags = restaurantService.localFetchTags();
 
+const formSchema = toTypedSchema(
+  z.object({
+    cravings: z.array(z.string()),
+    cities: z.array(z.string()),
+    tags: z.array(z.string()),
+  })
+);
 
-const cities = [];
-restaurantService.localFetchCities().forEach((x, i) =>  cities.push({id: x, label: x}));
-
-// interface Craving {
-//   id: string;
-//   label: string;
-// }
-const cravings = [];
-restaurantService.localFetchCravings().forEach((x, i) =>  cravings.push({id: x, label: x}));
-
-const tags = [];
-restaurantService.localFetchTags().forEach((x, i) =>  tags.push({id: x, label: x}));
-
-const formSchema = toTypedSchema(z.object({
-  cravings: z.array(z.string()),
-  cities: z.array(z.number()),
-  tags: z.array(z.string())
-}))
-
-const { handleSubmit } = useForm({
+const { handleSubmit, resetForm } = useForm({
   validationSchema: formSchema,
   initialValues: {
     cravings: [],
@@ -149,15 +168,14 @@ const { handleSubmit } = useForm({
 })
 
 const filteredRestaurants = ref([]);
-const emit = defineEmits(['filteredRestaurants']);
+const emit = defineEmits(['filteredRestaurants', 'closeModal']);
 
 const restaurants = ref(restaurantService.localFetchRestaurants());
-
 
 const applyFilters = (values) => {
   filteredRestaurants.value = restaurants.value.filter(item => {
       const cravingMatches = values.cravings.length === 0 || values.cravings.includes(item.craving);
-      const cityMatches = values.cities.length === 0 || values.cities.includes(item.city);
+      const cityMatches = values.cities.length === 0 || values.cities.includes(String(item.city));
       const tagMatches = values.tags.length === 0 || item.tags.some(tag => values.tags.includes(tag));
       return cravingMatches && cityMatches && tagMatches;
     });
@@ -167,6 +185,7 @@ const applyFilters = (values) => {
 const onSubmit = handleSubmit((values) => {
   console.log(values)
   applyFilters(values)
+  emit('closeModal');
 })
 
 const contentVisibleCravings = ref(true);
@@ -182,11 +201,20 @@ const setContentCities = () => {
 const setContentTags = () => {
   contentVisibleTags.value = !contentVisibleTags.value;
 };
+
+const getIconForCraving = (cravingId) => {
+  // Replace with your actual mapping of craving IDs to PNG paths
+  const icons = {
+    cafe: 'map_icons/local_cafe_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
+    bar: 'map_icons/wine_bar_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
+    commerce: 'map_icons/storefront_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
+    table: 'map_icons/restaurant_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
+    pouce: 'map_icons/lunch_dining_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
+  };
+  return icons[cravingId] || '/icons/default.png'; // Fallback to default icon
+};
+
+const resetToggles = () => {
+  resetForm();
+};
 </script>
-
-<style>
-
-
-
-
-</style>

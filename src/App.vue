@@ -20,7 +20,7 @@
     <main>
       <div class="app-container">
         <ModalComponent v-if="isMobile" :isOpen="isFilterOpen" @close="closeFilter">
-          <FilterComponent @filteredRestaurants="updatedRestaurants" />
+          <FilterComponent @filteredRestaurants="updatedRestaurants" @closeModal="closeFilter"/>
         </ModalComponent>
         <SidebarComponent v-if="!isMobile" class="sidebar" >
           <FilterComponent @filteredRestaurants="updatedRestaurants" />
@@ -135,7 +135,6 @@ a {
   bottom: 20px; /* Distance from the bottom */
   left: 50%; /* Position the button's left edge at the horizontal center */
   transform: translateX(-50%); /* Shift the button back by half its width to center it */
-  width: 80%; /* Make the button take up 80% of the available width */
   max-width: 400px; /* Optional: Limit the maximum width to keep it visually appealing */
   padding: 10px 20px; /* Adjust for desired button size */
   border: none; /* Remove default border */

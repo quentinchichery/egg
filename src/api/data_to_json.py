@@ -53,19 +53,12 @@ def export_to_json(csv_path: str, json_path: str) -> None:
     print(cravings)
     tags = df["tags"].explode().unique()
     print(tags)
-    export = {
-        "cravings": cravings.tolist().remove("nan"),
-        "cities": cities.tolist(),
-        "tags": tags.tolist()
-    }
-    with open("./cities-cravings-tags.json", 'w') as fp:
-        json.dump(export, fp)
 
     # export csv
     df['tags'] = df['tags'].apply(lambda x: '/'.join(x))
     df.to_csv('processed-data.csv', sep=";", index=False, encoding="utf-8")
 
 if __name__ == "__main__":
-    csv_path = r"C:\Users\Quentin\Desktop\IT\potamApp\potam-app\src\api\data.csv"
-    json_path = "./data-20241118.json"
+    csv_path = r"C:\Users\Quentin\Desktop\IT\potamApp\potam-app\src\api\20250128_data.csv"
+    json_path = "../data/restaurants.json"
     export_to_json(csv_path, json_path)

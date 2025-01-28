@@ -14,7 +14,6 @@ id;lat;long;name;city;craving;tags;addresse
 38;48.8543713;2.3249371;Certified café;75007;cafe;nan;83P Rue du Bac, 75007 Paris
 40;48.8470061;2.3481962;TRAM café librairie;75005;cafe;coeur;47 Rue de la Montagne Ste Geneviève, 75005 Paris
 43;48.8735287;2.3822625;Combat;75019;bar;nan;63 Rue de Belleville, 75019 Paris
-44;48.8640676;2.3658365;Bisou.;75003;bar;nan;15 Bd du Temple, 75003 Paris
 45;48.854815;2.3759872;Fréquence;75011;bar;nan;20 Rue Keller, 75011 Paris
 46;48.8627195;2.3734617;Dirty Lemon;75011;bar;nan;24 Rue de la Folie Méricourt, 75011 Paris
 47;48.8752266;2.35072;Divine;75010;bar;nan;61 Rue d'Hauteville, 75010 Paris
@@ -68,7 +67,6 @@ id;lat;long;name;city;craving;tags;addresse
 179;48.865241;2.328127;Le Meurice;75001;table;gastronomique;228 Rue de Rivoli, 75001 Paris
 180;48.8679572;2.3331957;Cédric Grolet Opéra;75002;commerce;boulangerie/patisserie;35 Av. de l'Opéra, 75002 Paris
 181;48.8679191;2.3473079;Boneshaker Doughnuts;75002;commerce;patisserie;77 Rue d'Aboukir, 75002 Paris
-182;48.8788863;2.339895;Fou de Pâtisserie - Martyrs;75009;commerce;patisserie;36 Rue des Martyrs, 75009 Paris
 183;48.8649348;2.346773;Fou de Pâtisserie - Montorgueil;75002;commerce;patisserie;45 Rue Montorgueil, 75002 Paris
 184;48.8712453;2.3628904;Du Pain et des Idées;75010;commerce;boulangerie;34 Rue Yves Toudic, 75010 Paris
 185;48.8652898;2.3687121;Boulangerie Utopie;75011;commerce;boulangerie/patisserie;20 Rue Jean-Pierre Timbaud, 75011 Paris
@@ -80,45 +78,39 @@ id;lat;long;name;city;craving;tags;addresse
 193;48.8528028;2.3852926;La Chocolaterie Cyril Lignac - Paul Bert;75011;commerce;patisserie/chocolatier;25 Rue Chanzy, 75011 Paris
 194;48.8789191;2.2953866;La Pâtisserie Cyril Lignac - Poncelet;75017;commerce;boulangerie/patisserie/chocolatier;9 Rue Bayen, 75017 Paris
 195;48.8472493;2.3180121;La Pâtisserie Cyril Lignac - Sèvres;75006;commerce;boulangerie/patisserie/chocolatier;133 Rue de Sèvres, 75006 Paris
-199;48.873503;2.364797;Ten Belles;75010;commerce;boulangerie/patisserie/torrefacteur;10 Rue de la Grange aux Belles, 75010 Paris
-200;48.8576591;2.3737094;Ten Belles Bread;75011;commerce;boulangerie/patisserie/torrefacteur;17-19 Rue Breguet, 75011 Paris
-201;48.8488192;2.3252547;Ten Belles 6;75006;commerce;boulangerie/patisserie/torrefacteur;53 Rue du Cherche-Midi, 75006 Paris
-203;48.8651843;2.3628213;Season Marais;75003;cafe;vege;1 Rue Charles-François Dupuis, 75003 Paris
-204;48.8594453;2.3680038;SEASON AMELOT;75003;cafe;vege;67 Rue St Sabin, 75003 Paris
+199;48.873503;2.364797;Ten Belles;75010;cafe;boulangerie/patisserie/torrefacteur/dwich;10 Rue de la Grange aux Belles, 75010 Paris
+200;48.8576591;2.3737094;Ten Belles Bread;75011;commerce;boulangerie/patisserie/torrefacteur/dwich;17-19 Rue Breguet, 75011 Paris
+201;48.8488192;2.3252547;Ten Belles 6;75006;cafe;boulangerie/patisserie/torrefacteur/dwich;53 Rue du Cherche-Midi, 75006 Paris
 208;48.8581277;2.3563382;Une Glace à Paris - Paris 4;75004;commerce;glace;15 Rue Sainte-Croix de la Bretonnerie, 75004 Paris
 209;48.885403;2.33635;Une Glace à Paris - Paris 18;75018;commerce;glace;16 Pl. des Abbesses, 75018 Paris
 211;48.8688552;2.3274604;Ritz Paris Le Comptoir;75001;commerce;patisserie/coeur;38 Rue Cambon, 75001 Paris
 212;48.8680987;2.3288932;Ritz Paris;75001;cafe;patisserie/the;15 Pl. Vendôme, 75001 Paris
 214;48.8753047;2.3383617;IBRIK CAFE;75009;cafe;nan;43  rue Laffitte, 75009 Paris
-215;48.8687679;2.346756;IBRICK KITCHEN;75002;cafe;nan;9  rue de Mulhouse, 75002 Paris
-218;48.8793902;2.3400956;Rose Bakery Take Away;75009;cafe;nan;46 Rue des Martyrs, 75009 Paris
-220;48.8783088;2.3401536;Rose Bakery Café;75009;cafe;patisserie;13 Rue Manuel, 75009 Paris
+215;48.8687679;2.346756;IBRICK KITCHEN;75002;table;nan;9  rue de Mulhouse, 75002 Paris
 224;48.8779892;2.34015;Sébastien Gaudard;75009;commerce;patisserie;22 Rue des Martyrs, 75009 Paris
 229;48.8479793;2.3122056;Mori Yoshida;75007;commerce;patisserie;65 Av. de Breteuil, 75007 Paris
 230;48.8644515;2.3645631;Jacques Genin - Marais;75003;commerce;patisserie/chocolatier;133 Rue de Turenne, 75003 Paris
 231;48.8538932;2.3240707;Jacques Genin - Varenne;75007;commerce;patisserie/chocolatier;27 Rue de Varenne, 75007 Paris
 232;48.8709889;2.3598067;Holybelly;75010;table;coeur;5 Rue Lucien Sampaix, 75010 Paris
-234;48.8692042;2.3664356;IMA Vegetarian Food;75010;table;vege;39 Quai de Valmy, 75019 Paris
-236;48.866097;2.3355537;Aki Boulangerie;75001;commerce;boulangerie/patisserie/japonais;16 Rue Sainte-Anne, 75001 Paris
+234;48.8692042;2.3664356;IMA CANTINE;75010;table;vege;39 Quai de Valmy, 75019 Paris
+236;48.866097;2.3355537;Aki Boulangerie;75001;commerce;boulangerie/patisserie/japonais/dwich;16 Rue Sainte-Anne, 75001 Paris
 237;48.8353826;2.3201681;Hexagone Café;75014;cafe;nan;121 Rue du Château, 75014 Paris
 238;48.847445;2.3413655;La Fabrique Givrée - Paris;75005;commerce;glace;26 Rue Soufflot, 75005 Paris
-245;48.8407592;2.3471091;=82paris;75005;cafe;japonais;11bis Rue Vauquelin, 75005 Paris
+245;48.8407592;2.3471091;+82paris;75005;cafe;japonais;11bis Rue Vauquelin, 75005 Paris
 261;48.8713341;2.3786279;Le Petit Grain;75020;commerce;boulangerie/patisserie;7 Rue Denoyez, 75020 Paris
 263;48.8549008;2.4020551;Le Bricheton;75020;commerce;boulangerie;50 Rue de la Réunion, 75020 Paris
 283;48.8482223;2.354136;Boulangerie Archibald;75005;commerce;boulangerie;28 Rue des Fossés Saint-Bernard, 75005 Paris
 284;48.8829005;2.2996108;Le Jardin Sucré;75017;commerce;patisserie/coeur;156 Rue de Courcelles, 75017 Paris
 285;48.8540583;2.3231838;Philippe Conticini - Paris 7;75007;commerce;patisserie;37 Rue de Varenne, 75007 Paris
-286;48.8673137;2.3587279;Philippe Conticini - Paris 3;75003;commerce;patisserie;31 RUE NOTRE DAME DE NAZARETH, 75003 Paris
 287;48.8575218;2.2780423;Philippe Conticini - Paris 16;75016;commerce;patisserie;42 RUE DE L'ANNONCIATION, 75016 Paris
 294;48.8630628;2.3607602;Gramme 3;75003;table;neobistrot;86 Rue des Archives, 75003 Paris
 295;48.8469687;2.3261043;Colorova;75006;table;neobistrot/coeur;47 Rue de l'Abbé Grégoire, 75006 Paris
 296;48.8570675;2.3746599;Pâtisserie Emma Duvéré;75011;cafe;patisserie;41 Rue Sedaine, 75011 Paris
 302;48.8719279;2.3661899;Sain Boulangerie;75010;commerce;boulangerie;15 Rue Marie et Louise, 75010 Paris
-303;48.864806;2.3728472;The French Bastards - Oberkampf;75011;commerce;boulangerie/patisserie;61 Rue Oberkampf, 75011 Paris
-304;48.8656446;2.350488;The French Bastards - Saint-Denis;75002;commerce;boulangerie/patisserie;181 Rue Saint-Denis, 75002 Paris
-305;48.8779588;2.2881116189534882;The French Bastards - Saint-Ferdinand;75017;commerce;boulangerie/patisserie;35 Pl. Saint-Ferdinand, 75017 Paris
+303;48.864806;2.3728472;The French Bastards - Oberkampf;75011;commerce;boulangerie/patisserie/dwich;61 Rue Oberkampf, 75011 Paris
+304;48.8656446;2.350488;The French Bastards - Saint-Denis;75002;commerce;boulangerie/patisserie/dwich;181 Rue Saint-Denis, 75002 Paris
+305;48.8779588;2.288111618953488;The French Bastards - Saint-Ferdinand;75017;commerce;boulangerie/patisserie/dwich;35 Pl. Saint-Ferdinand, 75017 Paris
 306;48.863387;2.3724971;Fermentation Générale;75011;commerce;boulangerie;37 Rue de la Folie Méricourt, 75011 Paris
-322;48.8315185;2.3289823;Le temps et le pain;75014;commerce;boulangerie/patisserie;7 Rue Mouton-Duvernet, 75014 Paris
 323;48.8678568;2.3480217;Plaq;75002;commerce;patisserie/coeur/chocolatier;4 Rue du Nil, 75002 Paris
 324;48.8672734;2.3441784;Tartelettes;75002;commerce;patisserie;102 Rue Montmartre, 75002 Paris
 325;48.8912569;2.3379019;Atelier P1;75018;commerce;boulangerie;157 Rue Marcadet, 75018 Paris
@@ -126,10 +118,7 @@ id;lat;long;name;city;craving;tags;addresse
 328;48.8639329;2.4423521;Fournil Éphémère L'Atelier;93100;commerce;boulangerie;11 Rue de l'Église, 93100 Montreuil
 329;48.8672831;2.3853019;Elements pain bio;75020;commerce;boulangerie;3 Rue Victor Letalle, 75020 Paris
 339;48.8851843;2.3396317;Shinya Pain Montmartre;75018;commerce;boulangerie;41 Rue des Trois Frères, 75018 Paris
-340;48.8828041;2.3172145;Boulangerie Bacillus;75017;commerce;boulangerie/patisserie;100 Rue des Dames, 75017 Paris
-341;48.8895612;2.3195482;Boulangerie Bacillus - Le Marché;75017;commerce;boulangerie/patisserie;96 Bis Rue Lemercier, 75017 Paris
 342;48.8652663;2.366502;Dreamin man;75011;cafe;nan;140 Rue Amelot, 75011 Paris
-349;48.9038525;2.3113194;La Rue Palloy Boulangerie.;92110;commerce;boulangerie/patisserie;50 Rue Palloy, 92110 Clichy
 355;48.8849882;2.3113731;Léonie - Levis;75017;commerce;boulangerie/patisserie;96 Rue de Lévis, 75017 Paris
 369;48.8507906;2.3813834;Mokonuts Cafe and Bakery;75011;table;neobistrot/coeur;5 Rue Saint-Bernard, 75011 Paris
 371;48.8806074;2.3500202;Les Arlots;75010;table;brasserie;136 Rue du Faubourg Poissonnière, 75010 Paris
@@ -142,9 +131,6 @@ id;lat;long;name;city;craving;tags;addresse
 382;48.8525339;2.3847257;Breizh Café Paul Bert;75011;table;crepes;23 Rue Paul Bert, 75011 Paris
 383;48.8516101;2.3387729;BREIZH Café Odéon;75006;table;crepes;1 Rue de l'Odéon, 75006 Paris
 384;48.8743853;2.3636484;Breizh Café Canal Saint-Martin;75010;table;crepes;112 Quai de Jemmapes, 75010 Paris
-391;48.83246425;2.372559771130674;La Felicità;75013;table;italien;5 Parvis Alan Turing, 75013 Paris
-393;48.8702691;2.3794311;Tripletta Belleville;75020;table;italien;88 Bd de Belleville, 75020 Paris
-395;48.8831097;2.341917;Bijou;75018;table;italien;10 Rue Dancourt, 75018 Paris
 396;48.8502275;2.3820566;Jouvence;75012;table;neobistrot;172 Bis Rue du Faubourg Saint-Antoine, 75012 Paris
 397;48.89058;2.316977;Coretta;75017;table;neobistrot;151Bis Rue Cardinet, 75017 Paris
 399;48.855031;2.341172;Ze Kitchen Galerie;75006;table;neobistrot;4 Rue des Grands Augustins, 75006 Paris
@@ -154,8 +140,6 @@ id;lat;long;name;city;craving;tags;addresse
 409;48.8609891;2.3813876;Le Servan;75011;table;neobistrot;32 Rue Saint-Maur, 75011 Paris
 419;48.863604;2.367232;Le Clown Bar;75011;table;neobistrot;114 Rue Amelot, 75011 Paris
 421;48.8661334;2.3362359;Restaurant Kunitoraya;75001;table;asiatique;1 Rue Villédo, 75001 Paris
-422;48.8658185;2.3367877;Kunitoraya - Udon Bistro;75001;table;asiatique;41 Rue de Richelieu, 75001 Paris
-425;48.8561495;2.3271971;Racines des Prés;75007;table;neobistrot;1 Rue de Gribeauval, 75007 Paris
 426;48.8816433;2.3466808;Faggio Rochechouart;75009;table;italien/coeur;72 Rue de Rochechouart, 75009 Paris
 429;48.8709843;2.3416907;Faggio Panorama;75002;table;italien;16 Passage des Panoramas, 75002 Paris
 432;48.851282;2.383292;Osteria Ferrara;75011;table;italien/neobistrot;7 Rue du Dahomey, 75011 Paris
@@ -165,7 +149,6 @@ id;lat;long;name;city;craving;tags;addresse
 439;48.8590191;2.3809707;cafe du coin;75011;table;neobistrot;9 Rue Camille Desmoulins, 75011 Paris
 440;48.8714263;2.3417173;Racines;75002;table;neobistrot/italien;8 Pass. des Panoramas, 75002 Paris
 442;48.8649757;2.3359041;Takara;75001;table;japonais;14 Rue Molière, 75001 Paris
-443;48.8645163;2.3494468;Dalmata Pizza Montorgueil;75002;table;italien;8 Rue Tiquetonne, 75002 Paris
 457;48.8603009;2.3060051;Chez L'Ami Jean;75007;table;brasserie/coeur;27 Rue Malar, 75007 Paris
 459;48.8654493;2.3289756;Kinugawa Vendôme;75001;table;japonais;9 Rue du Mont Thabor, 75001 Paris
 460;48.8502684;2.3186866;Aida;75007;table;japonais;1 Rue Pierre Leroux, 75007 Paris
@@ -179,7 +162,7 @@ id;lat;long;name;city;craving;tags;addresse
 484;48.8732428;2.350105;Restaurant eels;75010;table;neobistrot;27 Rue d'Hauteville, 75010 Paris
 487;48.8672796;2.2976485;Restaurant Substance;75016;table;etoile/coeur/gastronomique;18 Rue de Chaillot, 75016 Paris
 488;48.858151;2.388381;Yard;75011;table;neobistrot;6 Rue de Mont-Louis, 75011 Paris
-489;48.8903736;2.3328924;Ētsi;75018;table;neobistrot/grec;23 Rue Eugène Carrière, 75018 Paris
+489;48.8903736;2.3328924;Ētsi - le bistro;75018;table;neobistrot/grec;23 Rue Eugène Carrière, 75018 Paris
 491;48.879344;2.321114;Mandoobar;75008;table;asiatique;7 Rue d'Édimbourg, 75008 Paris
 500;48.8527401;2.3849339;Le Chardenoux Cyril Lignac;75011;table;neobistrot;1 Rue Jules Vallès, 75011 Paris
 511;48.8709479;2.3416459;Adar;75002;table;neobistrot/traiteur;49 Pass. des Panoramas, 75002 Paris
@@ -200,7 +183,6 @@ id;lat;long;name;city;craving;tags;addresse
 542;48.8641807;2.3679156;Le Tagine;75011;table;orient;13 Rue de Crussol, 75011 Paris
 543;48.8878044;2.3347482;Chantoiseau;75018;table;neobistrot;63 Rue Lepic, 75018 Paris
 544;48.9042407;2.3390165;Bonne Aventure;93400;table;neobistrot/vins/coeur;59 Rue des Rosiers, 93200 Saint Ouen
-546;48.8537509;2.3404345;Kitchen Galerie Bis;75006;table;neobistrot;25 Rue des Grands Augustins, 75006 Paris
 547;48.8578452;2.3965621;Caché;75020;table;neobistrot;13 Vla Riberolle, 75020 Paris
 548;48.8814656;2.3183193;Le Bar à sushi Izumi;75008;table;japonais;55 Bd des Batignolles, 75008 Paris
 549;48.8634143;2.3798308;Restaurant Aglio e Olio;75011;table;neobistrot/italien;5 Rue Guillaume Bertrand, 75011 Paris
@@ -229,13 +211,12 @@ id;lat;long;name;city;craving;tags;addresse
 637;48.8578265;2.3571762;PNY BURGER BRETONNERIE;75004;table;burger;10 Rue Sainte-Croix de la Bretonnerie, 75004 Paris
 639;48.89445;2.340529;Le Ruisseau - Paris 18;75018;table;burger;65 Rue du Ruisseau, 75018 Paris
 640;48.860939;2.3544983;Le Ruisseau Burger Joint;75003;table;burger;22 Rue Rambuteau, 75003 Paris
-647;48.8777917;2.3651585;STREET BANGKOK - Canal;75010;table;asiatique;3 Rue Eugène Varlin, 75010 Paris
 651;48.8854377;2.3198813;Les frères des Batignolles;75017;pouce;orient/coeur/dwich;45 Rue des Batignolles, 75017 Paris
-655;48.8617983;2.3829094;Yemma - Chemin Vert;75011;table;orient;119 Rue du Chemin Vert, 75011 Paris 
-656;48.8657477;2.3505033;Yemma - Saint Sauveur;75002;table;orient;2 Rue Saint-Sauveur, 75002 Paris
+655;48.8617983;2.3829094;Cantine Yemma - Chemin Vert;75011;table;orient;119 Rue du Chemin Vert, 75011 Paris
+656;48.8657477;2.3505033;Cantine Yemma - Saint Sauveur;75002;table;orient;2 Rue Saint-Sauveur, 75002 Paris
 659;48.8582675;2.3534227;Homer - all about lobster;75004;table;nan;21 Rue Rambuteau, 75004 Paris
 660;48.8613189;2.3650928;Pontochoux;75003;table;nan;18 Rue du Pont aux Choux, 75003 Paris
-666;48.862580901888556;2.3406734191261234;IPPUDO Louvre;75001;table;japonais;74-76 rue Jean-Jacques Rousseau, 75001 Paris
+666;48.86258090188856;2.340673419126124;IPPUDO Louvre;75001;table;japonais;74-76 rue Jean-Jacques Rousseau, 75001 Paris
 667;48.8531572;2.3378245;IPPUDO Saint-Germain;75006;table;japonais;14 rue Grégoire de Tours, 75006 Paris
 668;48.8710571;2.3612238;IPPUDO République;75010;table;japonais;6 place Jacques Bonsergent, 75010 Paris
 669;48.85464;2.338068;Kodawari Ramen (Yokochō);75006;table;japonais;29 Rue Mazarine, 75006 Paris
@@ -252,11 +233,9 @@ id;lat;long;name;city;craving;tags;addresse
 691;48.8729574;2.3426198;Miznon - 9;75009;table;orient;3 Rue de la Grange Batelière, 75009 Paris
 692;48.8571596;2.3589213;Miznon - 4;75004;table;orient;22 Rue des Ecouffes, 75004 Paris
 693;48.8692326;2.3664895;Miznon - 10;75010;table;orient;37 Quai de Valmy, 75010 Paris
-697;48.8696583;2.3435979;Mr ZHAO;75002;table;japonais;37 Rue des Jeuneurs, 75002 Paris
 699;48.8570997;2.3784981;Chez Aline;75011;pouce;dwich;85 Rue de la Roquette, 75011 Paris
 700;48.8659891;2.3325777;EchizenSOBA TOGO;75001;table;japonais;33 Rue Saint-Roch, 75001 Paris
 714;48.8663375;2.3331631;SANJO;75001;table;japonais;29 Rue d'Argenteuil, 75001 Paris
-715;48.8795715;2.3481848;Délice de Condorcet;75009;table;asiatique;10 Rue Condorcet, 75009 Paris
 716;48.8667905;2.3764513;Le Favori;75011;table;dwich;112 Rue Saint-Maur, 75011 Paris
 718;48.8906451;2.3452711;GEMÜSE - Berliner Kebap;75018;pouce;dwich;61 Rue Ramey, 75018 Paris
 719;48.8534569;2.374628;Sando Club;75011;table;dwich;1 Passage Thiéré, 75011 Paris
@@ -265,11 +244,7 @@ id;lat;long;name;city;craving;tags;addresse
 723;48.8819802;2.3364629;El Nopal Taqueria;75009;table;mexicain;5 Rue Duperré, 75009 Paris
 726;48.872194;2.362641;SAaM;75010;table;asiatique;59Bis Rue de Lancry, 75010 Paris
 727;48.8242888;2.3680862;Pho Bida Viet Nam;75013;table;asiatique;36 - 38 Rue Nationale, 75013 Paris
-728;48.842221;2.351932;Foyer Vietnam;75005;table;asiatique;80 Rue Monge, 75005 Paris
-729;48.8731454;2.3603226;La Taverne de Zhao;75010;table;asiatique;49 Rue des Vinaigriers, 75010 Paris
 732;48.8478104;2.352104;Bonvivant Pizza;75005;table;italien;4 Rue des Écoles, 75005 Paris
-733;48.850215;2.385021;Joayo Bastille;75011;table;asiatique;239 Rue du Faubourg Saint-Antoine, 75011 Paris
-734;48.8464963;2.3306421;Joayo Luxembourg;75006;table;asiatique;54 Rue d'Assas, 75006 Paris
 736;48.8646675;2.3665318;Paperboy Paris;75011;cafe;nan;137 Rue Amelot, 75011 Paris
 743;48.822139;2.361378;Pho Taï;75013;table;asiatique;13 Rue Philibert Lucot, 75013 Paris
 744;48.8699347;2.3719045;Terre Rosse pizzeria;75011;table;italien;14 Rue des Goncourt, 75011 Paris
@@ -381,7 +356,7 @@ id;lat;long;name;city;craving;tags;addresse
 1020;48.8914839;2.3199191;Café Pimpin 17;75017;cafe;nan;7 Rue Guy Môquet, 75017 Paris
 1021;48.8889141;2.3177662;CADUCÉE Café Contemporain;75017;table;nan;19 Rue Brochant, 75017 Paris
 1022;48.8587124;2.3646105;WHITE Coffeeshop;75003;cafe;nan;56 Rue de Turenne, 75003 Paris
-1024;48.8846762;2.3418032;Clove Coffee Shop;75018;cafe;coeur;14 Rue Chappe, 75018 Paris
+1024;48.8846762;2.3418032;Clove Coffee Shop;75018;cafe;coeur/torrefacteur;14 Rue Chappe, 75018 Paris
 1025;48.8676967;2.4007448;The Dancing Goat;75020;cafe;nan;117 Av. Gambetta, 75020 Paris
 1026;48.8258458;2.3780744;Café Cayo;75013;cafe;nan;9 Rue du Chevaleret, 75013 Paris
 1027;48.8534073;2.375778;Café Caractère;75011;cafe;nan;2 Rue des Taillandiers, 75011 Paris
@@ -436,7 +411,7 @@ id;lat;long;name;city;craving;tags;addresse
 1118;48.843799;2.3171571;Misu;75015;table;asiatique/coeur;8 bis Rue Falguière, 75015 Paris
 1119;48.881423;2.2986819;Le Bistrot Flaubert;75017;table;neobistrot;10 Rue Gustave Flaubert, 75017 Paris
 1120;48.8887664;2.316564;Le Truffaut;75017;table;neobistrot;89 Rue Truffaut, 75017 Paris
-1121;48.8623962;2.3423373;iRASSHAi;75001;commerce;asiatique/epicerie;40 Rue du Louvre, 75001 Paris
+1121;48.8623962;2.3423373;iRASSHAi;75001;commerce;asiatique/epicerie/coeur;40 Rue du Louvre, 75001 Paris
 1122;48.8723043;2.3480192;Faubourg Daimant;75010;table;neobistrot/vege;20 Rue du Faubourg Poissonnière, 75010 Paris
 1125;48.8673431;2.3594074;Elmer;75003;table;neobistrot;30 Rue Notre Dame de Nazareth, 75003 Paris
 1126;48.8636109;2.3573253;Datil;75003;table;neobistrot;13 Rue des Gravilliers, 75003 Paris
@@ -446,9 +421,9 @@ id;lat;long;name;city;craving;tags;addresse
 1132;48.8802685;2.3432544;CUISINE;75009;table;neobistrot;50 Rue Condorcet, 75009 Paris
 1136;48.8653627;2.3620515;Christophe Louie;75003;commerce;patisserie/boulangerie/coeur;12 Rue Dupetit-Thouars, 75003 Paris
 1138;48.8717103;2.3637327;BUDDY BUDDY;75010;cafe;coeur;15 Rue de Marseille, 75010 Paris
-1139;48.8592912;2.3469784;Motors Coffee;75001;cafe;coeur;7 Rue des Halles, 75001 Paris
+1139;48.8592912;2.3469784;Motors Coffee;75001;cafe;coeur/torrefacteur;7 Rue des Halles, 75001 Paris
 1141;48.8815097;2.3373392;Café Pigalle;75009;cafe;nan;7 Rue Frochot, 75009 Paris
-1142;48.851476325660364;2.3489969807037516;Shakespeare and Company Café;75005;cafe;nan;35 Rue de la Bûcherie, 75005 Paris
+1142;48.85147632566037;2.348996980703752;Shakespeare and Company Café;75005;cafe;nan;35 Rue de la Bûcherie, 75005 Paris
 1144;48.8765818;2.3371633;Café Blondie;75009;cafe;nan;40 Rue Saint-Georges, 75009 Paris
 1148;48.8582103;2.3543485;Eataly;75004;commerce;epicerie/vins/italien;37 Rue Sainte-Croix de la Bretonnerie, 75004 Paris
 1149;48.8934539;2.3257277;Florian Mésère Chocolatier;75017;commerce;chocolatier;18 Rue de La Jonquière, 75017 Paris
@@ -489,13 +464,13 @@ id;lat;long;name;city;craving;tags;addresse
 1196;48.8756802;2.3492156;ChoCho;75010;table;neobistrot;54 Rue de Paradis, 75010 Paris
 1198;48.8746019;2.3307363;MOTA;75009;cafe;nan;23 Rue Joubert, 75009 Paris
 1199;48.893816;2.3390239;Le Boréal;75018;table;neobistrot;39 Rue Montcalm, 75018 Paris
-1201;48.88589605984979;2.3789781463621282;PARPAINS;75019;cafe;nan;30 Rue Tandou, 75019 Paris
-1203;48.8543331;2.3623435;Les trois chocolats Paris;75004;commerce;patisserie/chocolatier;45 Rue Saint-Paul, 75004 Paris
+1201;48.88589605984979;2.378978146362128;PARPAINS;75019;cafe;nan;30 Rue Tandou, 75019 Paris
+1203;48.8543331;2.3623435;Les trois chocolats Paris;75004;commerce;patisserie/chocolatier/coeur;45 Rue Saint-Paul, 75004 Paris
 1204;48.8814636;2.3449718;Boulangerie Léonie - Trudaine;75009;commerce;patisserie/boulangerie;15 Av. Trudaine, 75009 Paris
 1205;48.8772622;2.3515365;Boulangerie Leonie - Hauteville;75010;commerce;patisserie/boulangerie;94 Rue d'Hauteville, 75010 Paris
 1209;48.8926006;2.3169321;Jolie Miche;75017;commerce;patisserie/boulangerie;176 Av. de Clichy, 75017 Paris
 1215;48.864978951691214;2.3358245103196413;PonPon Café;75001;cafe;japonais;3 Rue Molière, 75001 Paris
-1216;48.8656052;2.3615362;I/O Café;75003;cafe;nan;16 Rue Dupetit-Thouars, 75003 Paris
+1216;48.8656052;2.3615362;I/O Café;75003;cafe;coeur/torrefacteur;16 Rue Dupetit-Thouars, 75003 Paris
 1217;48.8614471;2.3583969;Sevenly Heart;75003;cafe;nan;55 Rue des Archives, 75003 Paris
 1218;48.8517378;2.3468034;CHANCEUX Galande;75005;cafe;coeur/dwich;63 Rue Galande, 75005 Paris
 1219;48.8623639;2.3798303;CHANCEUX St Maur;75011;cafe;dwich;57 Rue Saint-Maur, 75011 Paris
@@ -577,9 +552,8 @@ id;lat;long;name;city;craving;tags;addresse
 1315;48.889671;2.412315;Fromagerie Double Crème;93500;commerce;cremerie;31 Rue Méhul, 93500 Pantin
 1316;48.889854;2.342211;Sobremesa;75018;table;neobistrot;127 Rue Caulaincourt, 75018 Paris
 1317;48.8705193;2.3457899;kiosk;75002;pouce;traiteur/dwich;18 Rue Saint-Fiacre, 75002 Paris
-1318;48.869675;2.3438333;"MOSUGO PARIS 2 PAR MORY SACKO
-";75002;pouce;nan;35 Rue des Jeuneurs, 75002 Paris
-1319;48.910653;2.333234;O Dürüm 2;93400;pouce;orient/dwich;16 Bis Av. Gabriel Péri, 93400 Saint-Ouen-sur-Seine
+1318;48.869675;2.3438333;MOSUGO PARIS 2 PAR MORY SACKO;75002;pouce;nan;35 Rue des Jeuneurs, 75002 Paris
+1319;48.910653;2.333234;O Dürüm 2;93400;pouce;orient/dwich/coeur;16 Bis Av. Gabriel Péri, 93400 Saint-Ouen-sur-Seine
 1320;48.869454;2.3339123;MARI MARI;75002;table;asiatique;23 Rue d'Antin, 75002 Paris
 1321;48.8752008;2.3816321;Buttes Snack Bar;75019;table;neobistrot;10 Rue Pradier, 75019 Paris
 1322;48.8241592;2.3246109;MA-SHI-TA;75014;table;asiatique;9 Rue Poirier de Narçay, 75014 Paris
@@ -589,7 +563,7 @@ id;lat;long;name;city;craving;tags;addresse
 1326;48.8924108;2.3400858;Coloré - Restaurant Paris 18;75018;table;neobistrot;20 Rue du Ruisseau, 75018 Paris
 1327;48.8701285;2.3745453;Le Café de l'Usine;75011;table;neobistrot;5 Pass. Piver, 75011 Paris
 1328;48.8537212;2.3866621;Les Mascareignes;75011;table;nan;202 Bd Voltaire, 75011 Paris
-1329;48.870485506517106;2.3212223444154234;Braise;75008;table;neobistrot;19 Rue d'Anjou, 75008 Paris
+1329;48.87048550651711;2.3212223444154234;Braise;75008;table;neobistrot;19 Rue d'Anjou, 75008 Paris
 1330;48.8662892;2.3327934;On Restaurant;75001;table;asiatique;39 Rue Saint-Roch, 75001 Paris
 1331;48.8742016;2.372776;ajar;75010;table;mexicain;34 Rue Sainte-Marthe, 75010 Paris
 1332;48.8514222;2.3837278;Adar - Traiteur & épicerie;75011;commerce;traiteur;11 Rue Faidherbe, 75011 Paris
@@ -614,3 +588,57 @@ id;lat;long;name;city;craving;tags;addresse
 1351;48.8794805;2.3633827;Fromagerie Fernin;75010;commerce;cremerie;204 Rue du Faubourg Saint-Martin, 75010 Paris
 1352;48.8615403;2.3575655;Bar Nouveau;75003;bar;nan;5 Rue des Haudriettes, 75003 Paris
 1353;48.8708798;2.3116327;Soon Grill;75008;table;asiatique;20 Rue Jean Mermoz, 75008 Paris
+1354;48.8614112;2.3642899;Dumbo Marais;75003;pouce;burger;6 Rue de Poitou, 75003 Paris
+1355;48.8617098;2.3424316;Boutique yam'Tcha;75001;cafe;asiatique;4 Rue Sauval, 75001 Paris
+1356;48.8678433;2.3364938;TonTon Ramen Paris;75002;table;japonais;4 Rue Cherubini, 75002 Paris
+1357;48.8675936;2.3439691;Leven;75002;table;orient;110 Rue Montmartre, 75002 Paris
+1358;48.8827713;2.3593543;Dishny;75010;table;indien;25 Rue Cail, 75010 Paris
+1359;48.876642750219744;2.3274523774488176;Gili-Gili;75009;table;japonais;3 bis Rue de Budapest, 75009 Paris
+1360;48.8791289;2.3858078;Vandal;75019;pouce;dwich;56 Rue des Alouettes, 75019 Paris
+1361;48.8642611;2.3415937;Mannie;75001;table;dwich;32 Rue Coquillière, 75001 Paris
+1362;48.8762236;2.3404073;Yory;75009;table;asiatique;1 Rue de Maubeuge, 75009 Paris
+1363;48.8823076;2.3336911;Sürpriz - 9;75009;pouce;orient/dwich;28 Rue Pierre Fontaine, 75009 Paris
+1364;48.8698927;2.3529458;Sürpriz - 10;75010;pouce;orient/dwich;28 Boulevard St Denis, 75010 Paris
+1365;48.8771585;2.3388922;La Sabicherie - Pita Sabich;75009;pouce;orient/dwich;6 Rue Notre Dame de Lorette, 75009 Paris
+1366;48.8794062;2.33375;BRU Paris;75009;table;neobistrot;28 Rue Jean-Baptiste Pigalle, 75009 Paris
+1367;48.8594415;2.3682914;Taverna;75011;table;grec;56 Rue Amelot, 75011 Paris
+1368;48.8608767;2.3758022;FURIA;75011;table;mexicain;2 Rue Lacharrière, 75011 Paris
+1369;48.866058;2.3486715;Shana;75002;table;orient;14 Rue Saint-Sauveur, 75002 Paris
+1370;48.8658077;2.3372458;EnYaa;75001;table;japonais;37 Rue de Montpensier, 75001 Paris
+1371;48.924916;2.441168;Delicatessen Place;75011;table;neobistrot;7 Rue Jean-Pierre Timbaud, 75011 Paris
+1372;48.8669757;2.3027092;Le Restaurant OKUDA;75008;table;japonais;7 Rue de la Tremoille, 75008 Paris
+1373;48.8730782;2.3537134;KUTI - Petites Ecuries;75010;table;africain;6 Rue des Petites Écuries, 75010 Paris
+1374;48.8543782;2.3760734;Tarántula Paris;75011;table;mexicain;13bis Rue Keller, 75011 Paris
+1375;48.8588428;2.3418987;Hakuba;75001;table;japonais;8 Quai du Louvre, 75001 Paris
+1376;48.8789981;2.3292387;Argile restaurant;75009;table;neobistrot;4 Rue de Milan, 75009 Paris
+1377;48.8685045;2.3701736;Vantre;75011;table;neobistrot;19 Rue de la Fontaine au Roi, 75011 Paris
+1378;48.8724155;2.3532678;Tempête;75010;table;neobistrot;5 Cour des Petites Écuries, 75010 Paris
+1379;48.8389989;2.3504935;Calice;75005;table;neobistrot;5 Rue de Bazeilles, 75005 Paris
+1380;48.8713568;2.3626892;Sur Mer;75010;table;neobistrot;1 Rue de Marseille, 75010 Paris
+1381;48.8743979;2.3588252;Fugue - Restaurant;75010;table;neobistrot;128 Rue du Faubourg Saint-Martin, 75010 Paris
+1382;48.8569061;2.378389;JIP;75011;table;coeur/neobistrot/asiatique;112 Rue de la Roquette, 75011 Paris
+1383;48.870873849999995;2.275560521555725;Restaurant Le Pré Catelan;75016;table;etoile/gastronomique;Bois de Boulogne, 75016 Paris
+1384;48.870873849999995;2.275560521555725;La Ferme du Pre Catelan;75016;table;bistrot;Bois de Boulogne, 75016 Paris
+1385;48.8588428;2.3418987;Plénitude;75001;table;etoile/gastronomique;8 Quai du Louvre, 75001 Paris
+1386;48.8661751;2.3042684;Jean Imbert au Plaza Athénée;75008;table;etoile/gastronomique;25 Av. Montaigne, 75008 Paris
+1387;48.8661628;2.3769935;La Panifacture;75011;commerce;boulangerie;104 Rue Saint-Maur, 75011 Paris
+1388;48.8912596;2.3384822;P1 Bouche;75018;cafe;nan;151bis Rue Marcadet, 75018 Paris
+1389;48.8723269;2.3825419;Bokbar;75020;cafe;nan;72 Rue Julien Lacroix, 75020 Paris
+1390;48.8734928;2.38366;Koni Coffee Shop;75020;cafe;nan;70 Rue de Belleville, 75020 Paris
+1391;48.8704581;2.3373664;Jirisan;75002;cafe;nan;2 Rue de Marivaux, 75002 Paris
+1392;48.84798028136526;2.3260284821878;Wani Coffee;75006;cafe;nan;7 ter Rue Saint-Placide, 75006 Paris
+1393;48.8562972;2.376344;Harvest.;75011;cafe;nan;65 Rue de la Roquette, 75011 Paris
+1394;48.84935752794484;2.3759240830038926;Magic Carpet Café;75012;cafe;nan;5 Bis R. de Prague, 75012 Paris
+1395;48.85808236028097;2.3439416552760015;LV Dream;75001;cafe;nan;26 Quai de la Mégisserie, 75001 Paris
+1396;48.8677462;2.3558288;Huddle Coffee;75003;cafe;nan;61 Rue Notre Dame de Nazareth, 75003 Paris
+1397;48.8613049;2.3651512;Pontochoux Café;75003;cafe;nan;18 Rue du Pont aux Choux, 75003 Paris
+1398;48.8625329;2.3404581;Calibré;75001;cafe;nan;15 Rue Jean-Jacques Rousseau, 75001 Paris
+1399;48.8681342;2.3871998;Café Lune;75020;cafe;nan;57 Rue de Ménilmontant, 75020 Paris
+1400;48.8809133;2.3370024;Soif, la Cave à Pigalle;75009;commerce;vins;35 Rue Victor Massé, 75009 Paris
+1401;48.8847448;2.3153661;Plaka Paris 17;75017;commerce;grec;46 Rue Legendre, 75017 Paris
+1402;48.878158799999994;2.338673288967342;Plaka Paris 9;75009;commerce;grec/dwich;19 R. des Martyrs, 75009 Paris
+1403;48.8430511;2.3415105;etsi | le traiteur;75005;commerce;grec;241 Rue Saint-Jacques, 75005 Paris
+1404;48.8809819;2.2988983;MIZNON WAGRAM;75017;table;orient;9 Rue Rennequin, 75017 Paris
+1405;48.8622747;2.3619516;Chez Alain Miam Miam;75003;pouce;dwich;26 Rue Charlot, 75003 Paris
+1406;48.8802801;2.3412832;Puffy;75009;cafe;nan;65 Rue Condorcet, 75009 Paris
+1407;48.8519165;2.3371278;Jugetsudo By Maruyama Nori;75006;cafe;the/coeur;95 Rue de Seine, 75006 Paris

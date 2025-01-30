@@ -12,6 +12,10 @@
 }
 #header_title {
   color: #007fff;
-  font-weight: bold;
+  font-family: "Cedarville Cursive", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 7vw;
 }
+
 </style>

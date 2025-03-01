@@ -44,6 +44,7 @@ img {
   text-align: center;
   color: white;
   font-weight: bold;
-  background-color: #454545; 
+  background-color: #454545;
+  padding: 7px;
 }
 </style>

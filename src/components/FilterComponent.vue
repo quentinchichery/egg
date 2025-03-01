@@ -82,7 +82,7 @@
           </Button>
         </div>
           <div v-show='contentVisibleTags'>
-           <ScrollArea class="h-28 rounded-md " type="always">
+           <!-- <ScrollArea class="h-48 rounded-md " type="always"> -->
               <FormField name="tags">
                 <FormItem>
                   <div class="flex flex-wrap justify-center space-x-1 space-y-1">
@@ -111,12 +111,12 @@
                   </div>
                 </FormItem>
               </FormField>
-            </ScrollArea>
+            <!-- </ScrollArea> -->
           </div>
         
         <div class="flex items-center justify-between w-full">
           <Button class="mt-3.5 ml-2" variant="ghost" @click="resetToggles">Effacer</Button>
-          <Button class="mt-3.5 mr-2" type="submit">Chercher</Button>
+          <Button class="mt-3.5 mr-2 bg-blue-500" type="submit">Chercher</Button>
         </div>
 
       </form>
@@ -179,7 +179,7 @@ const applyFilters = (values) => {
       const tagMatches = values.tags.length === 0 || item.tags.some(tag => values.tags.includes(tag));
       return cravingMatches && cityMatches && tagMatches;
     });
-    emit('filteredRestaurants', filteredRestaurants.value);
+  emit('filteredRestaurants', filteredRestaurants.value);
   };
 
 const onSubmit = handleSubmit((values) => {

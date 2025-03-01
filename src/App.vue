@@ -28,7 +28,7 @@
         <div class="main-content">
           <router-view style="padding-right: 10px; padding-left: 10px" :restaurants="restaurants"/>
         </div>
-        <Button v-if="isMobile" @click="openFilter" class="filter-button">
+        <Button v-if="isMobile" @click="openFilter" class="filter-button bg-blue-400">
           <Filter class="w-4 h-4 mr-2"/> Filter
         </Button>
       </div>
@@ -65,12 +65,22 @@ const getButtonVariant = (targetPath) => {
   return route.path === targetPath ? 'default' : 'outline';
 };
 
-// Initialize reactive data
-const restaurants = ref(restaurantService.localFetchRestaurants());
+// Fisher-Yates shuffle algorithm
+const shuffleArray = (array) => {
+  const shuffledArray = [...array]; // Create a copy of the array
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+};
+
+// Initialize reactive data with shuffling
+const restaurants = ref(shuffleArray(restaurantService.localFetchRestaurants()));
 
 // Update function to handle filtering in FilterComponent
 function updatedRestaurants(newData) {
-  restaurants.value = newData;
+  restaurants.value = shuffleArray(newData); // Shuffle the new data
 }
 
 const isModalOpen = ref(false);
@@ -136,6 +146,7 @@ a {
   left: 50%; /* Position the button's left edge at the horizontal center */
   transform: translateX(-50%); /* Shift the button back by half its width to center it */
   max-width: 400px; /* Optional: Limit the maximum width to keep it visually appealing */
+  width: 50%;
   padding: 10px 20px; /* Adjust for desired button size */
   border: none; /* Remove default border */
   border-radius: 5px; /* Round the corners */

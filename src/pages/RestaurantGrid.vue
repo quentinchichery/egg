@@ -14,7 +14,6 @@ defineProps({
       <RestaurantCard 
         :key="restaurant.id" 
         :restaurant="restaurant" 
-        @click="showRestaurantDetails(restaurant)"
         />
     </div>
   </div>

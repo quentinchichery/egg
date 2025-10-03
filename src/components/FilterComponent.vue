@@ -125,6 +125,7 @@
 
 <script setup>
 import restaurantService from '@/api/restaurantService';
+import { cravingIcons } from '@/services/constants';
 import { ChevronDown } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -145,6 +146,9 @@ import { h } from 'vue';
 import * as z from 'zod';
 import { ref, computed } from 'vue';
 import { watch } from 'vue';
+import { useRestaurantStore } from '@/stores/restaurantStore';
+
+const restaurantStore = useRestaurantStore();
 
 const cravings = restaurantService.localFetchCravings();
 const cities = restaurantService.localFetchCities();
@@ -183,10 +187,14 @@ const applyFilters = (values) => {
   };
 
 const onSubmit = handleSubmit((values) => {
-  console.log(values)
-  applyFilters(values)
+  restaurantStore.applyFilters(values); // On appelle l'action du store
   emit('closeModal');
-})
+});
+
+const resetToggles = () => {
+  resetForm(); // Ceci vient de vee-validate
+  restaurantStore.resetFilters(); // On reset aussi l'état dans le store
+};
 
 const contentVisibleCravings = ref(true);
 const contentVisibleCities = ref(true);
@@ -203,18 +211,7 @@ const setContentTags = () => {
 };
 
 const getIconForCraving = (cravingId) => {
-  // Replace with your actual mapping of craving IDs to PNG paths
-  const icons = {
-    cafe: 'map_icons/local_cafe_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
-    bar: 'map_icons/wine_bar_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
-    commerce: 'map_icons/storefront_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
-    table: 'map_icons/restaurant_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
-    pouce: 'map_icons/lunch_dining_32dp_27272A_FILL0_wght400_GRAD0_opsz40.png',
-  };
-  return icons[cravingId] || '/icons/default.png'; // Fallback to default icon
+  return cravingIcons[cravingId] || '/icons/default.png';
 };
 
-const resetToggles = () => {
-  resetForm();
-};
 </script>

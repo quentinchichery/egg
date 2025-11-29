@@ -196,7 +196,8 @@ onMounted(() => {
   position: absolute;
   top: 10px;
   right: 10px;
-  z-index: 1000;
+  margin-right: 10px;
+  z-index: 10;
   background: white;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
@@ -205,7 +206,7 @@ onMounted(() => {
   position: absolute;
   top: 60px;
   right: 10px;
-  z-index: 1000;
+  z-index: 11;
   max-width: 300px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }

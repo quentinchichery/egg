@@ -39,7 +39,8 @@ if __name__ == "__main__":
     output_folder = "../../public/restaurant_pictures"
     thumbnail_size = (600, 600)
     ids = get_id_list(r"C:\Users\Quentin\Desktop\IT\potamApp\potam-app\src\api\processed-data.csv")
-    print(len(ids))
+    print(f"There are {len(ids)} places ids.")
+    print("processing ...")
 
     create_thumbnails(input_folder, output_folder, ids, thumbnail_size)
     check_place_has_picture(output_folder, ids)

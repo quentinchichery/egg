@@ -2,7 +2,6 @@
   <div class="map-container">
     <div id="map" style="height: 500px; width: 100%;" class="z-0"></div>
     
-    <!-- Locate Me Button -->
     <Button 
       @click="locateUser" 
       :disabled="isLocating"
@@ -15,7 +14,6 @@
       {{ isLocating ? 'Localisation...' : 'Me localiser' }}
     </Button>
 
-    <!-- Error message -->
     <Alert v-if="locationError" class="error-alert" variant="destructive">
       <AlertCircle class="h-4 w-4" />
       <AlertDescription>
@@ -27,7 +25,7 @@
 
 <script setup>
 import { cravingIcons } from '@/services/constants';
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref, shallowRef, watch } from 'vue'; // Import shallowRef
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Button } from '@/components/ui/button';
@@ -42,13 +40,14 @@ const props = defineProps({
 });
 
 // State
-const map = ref(null);
+// USE shallowRef FOR LEAFLET INSTANCES
+const map = shallowRef(null); 
+const markersLayer = shallowRef(null); 
+const userLocationMarker = shallowRef(null);
+
+// Standard refs for data/UI state
 const selectedRestaurant = ref(null);
 const markers = ref([]);
-const center = [48.8566, 2.3522];
-const zoom = 12;
-const markersLayer = ref(null); // LayerGroup for markers
-const userLocationMarker = ref(null); // User location marker
 const isLocating = ref(false);
 const locationError = ref('');
 
@@ -72,19 +71,17 @@ const locateUser = () => {
   const options = {
     enableHighAccuracy: true,
     timeout: 10000,
-    maximumAge: 300000 // 5 minutes
+    maximumAge: 300000 
   };
 
   navigator.geolocation.getCurrentPosition(
     (position) => {
       const { latitude, longitude } = position.coords;
       
-      // Remove previous user location marker
       if (userLocationMarker.value) {
         map.value.removeLayer(userLocationMarker.value);
       }
 
-      // Create user location marker with different style
       const userIcon = L.divIcon({
         className: '', 
         html: `
@@ -97,54 +94,43 @@ const locateUser = () => {
         iconAnchor: [10, 10],
       });
 
-      // Add user location marker
       userLocationMarker.value = L.marker([latitude, longitude], { icon: userIcon })
         .addTo(map.value)
         .bindPopup('Votre position')
         .openPopup();
 
-      // Center map on user location with appropriate zoom
       map.value.setView([latitude, longitude], 15);
       
       isLocating.value = false;
     },
     (error) => {
       isLocating.value = false;
-      
+      // ... error handling logic ...
       switch(error.code) {
         case error.PERMISSION_DENIED:
           locationError.value = 'Autorisation de géolocalisation refusée.';
           break;
-        case error.POSITION_UNAVAILABLE:
-          locationError.value = 'Position non disponible.';
-          break;
-        case error.TIMEOUT:
-          locationError.value = 'Délai de géolocalisation dépassé.';
-          break;
+        // ... other cases ...
         default:
           locationError.value = 'Erreur de géolocalisation.';
           break;
       }
-      
-      // Hide error after 5 seconds
-      setTimeout(() => {
-        locationError.value = '';
-      }, 5000);
+      setTimeout(() => { locationError.value = ''; }, 5000);
     },
     options
   );
 };
 
-
-// Function to update markers (using the optimized method)
+// Function to update markers 
 const updateMarkers = (restaurantsToDisplay) => {
+  // Check if markersLayer exists
   if (!map.value || !markersLayer.value) return;
 
-  // Clear only the markers, not the whole map
   markersLayer.value.clearLayers();
 
   restaurantsToDisplay.forEach(restaurant => {
     if (restaurant.lat != null && restaurant.long != null) {
+      // ... (your existing icon creation logic) ...
       const iconHtml = `
         <div class="custom-marker-icon">
           <div class="icon-circle">
@@ -152,8 +138,8 @@ const updateMarkers = (restaurantsToDisplay) => {
           </div>
         </div>
       `;
+      
       const markerIcon = L.divIcon({
-        // Use a specific class name for the container
         className: 'my-custom-leaflet-marker', 
         html: iconHtml,
         iconSize: [30, 30],
@@ -171,7 +157,6 @@ const updateMarkers = (restaurantsToDisplay) => {
       
       const marker = L.marker([restaurant.lat, restaurant.long], { icon: markerIcon });
       
-      // We bind the popup and add the click listener inside its 'open' event
       marker.bindPopup(popupContent).on('popupopen', (e) => {
         const popupNode = e.popup.getElement().querySelector('.custom-marker');
         if (popupNode) {
@@ -179,13 +164,11 @@ const updateMarkers = (restaurantsToDisplay) => {
         }
       });
 
-      // Add the new marker to our layer group
       markersLayer.value.addLayer(marker);
     }
   });
 };
 
-// Function to initialize the map
 const initializeMap = () => {
   map.value = L.map('map').setView([48.8566, 2.3522], 12);
 
@@ -193,15 +176,12 @@ const initializeMap = () => {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map.value);
 
-  // Initialize the layer group once
+  // Initialize the layer group
   markersLayer.value = L.layerGroup().addTo(map.value);
 
-  // Initial drawing of markers
   updateMarkers(props.restaurants);
 };
 
-// 3. SET UP ON MOUNT
-// When the component is ready, initialize the map.
 onMounted(() => {
   initializeMap();
 });

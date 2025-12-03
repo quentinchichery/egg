@@ -111,7 +111,6 @@
                   </div>
                 </FormItem>
               </FormField>
-            <!-- </ScrollArea> -->
           </div>
         
         <div class="flex items-center justify-between w-full">
@@ -162,7 +161,8 @@ const formSchema = toTypedSchema(
   })
 );
 
-const { handleSubmit, resetForm } = useForm({
+// Récupération de `setValues` de useForm
+const { handleSubmit, resetForm, setValues } = useForm({
   validationSchema: formSchema,
   initialValues: {
     cravings: [],
@@ -213,5 +213,13 @@ const setContentTags = () => {
 const getIconForCraving = (cravingId) => {
   return cravingIcons[cravingId] || '/icons/default.png';
 };
+
+// 💡 NOUVEAU : Synchronisation du formulaire avec le store Pinia
+watch(() => restaurantStore.filters, (newFilters) => {
+    // setValues met à jour les champs du formulaire avec les nouvelles valeurs
+    setValues(newFilters, { force: true });
+}, { deep: true, immediate: true }); 
+// deep: true pour détecter les changements à l'intérieur de l'objet filters
+// immediate: true pour synchroniser l'état initial (si besoin)
 
 </script>

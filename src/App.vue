@@ -26,6 +26,8 @@
           <FilterComponent @filteredRestaurants="updatedRestaurants" />
         </SidebarComponent>
         <div class="main-content">
+          <SelectedFiltersDisplay /> 
+          <hr class="my-4" v-if="restaurantStore.selectedFilterLabels.length > 0" />
           <router-view style="padding-right: 10px; padding-left: 10px" :restaurants="restaurantStore.filteredRestaurants"/>
         </div>
         <Button v-if="isMobile" @click="openFilter" class="filter-button bg-blue-400">
@@ -41,6 +43,7 @@
 </template>
 
 <script setup>
+import SelectedFiltersDisplay from '@/components/SelectedFiltersDisplay.vue';
 import FilterComponent from '@/components/FilterComponent.vue';
 import ModalComponent from '@/components/ModalComponent.vue';
 import SidebarComponent from '@/components/SidebarComponent.vue';

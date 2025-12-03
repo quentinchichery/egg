@@ -13,6 +13,12 @@ const shuffleArray = (array) => {
   return shuffledArray;
 };
 
+// --- Données de référence chargées une seule fois ---
+const allCravings = restaurantService.localFetchCravings();
+const allCities = restaurantService.localFetchCities();
+const allTags = restaurantService.localFetchTags();
+
+
 export const useRestaurantStore = defineStore('restaurants', () => {
   // STATE (équivalent de data)
   const allRestaurants = ref(shuffleArray(restaurantService.localFetchRestaurants()));
@@ -35,6 +41,31 @@ export const useRestaurantStore = defineStore('restaurants', () => {
     });
   });
 
+  // NOUVEAU GETTER : Permet d'obtenir les labels des filtres pour l'affichage
+  const selectedFilterLabels = computed(() => {
+    const labels = [];
+    
+    // 1. Cravings (Types)
+    filters.value.cravings.forEach(id => {
+      const item = allCravings.find(c => c.id === id);
+      if (item) labels.push({ type: 'cravings', id: item.id, label: item.label });
+    });
+    
+    // 2. Cities (Quartiers)
+    filters.value.cities.forEach(id => {
+      const item = allCities.find(c => c.id === id);
+      if (item) labels.push({ type: 'cities', id: item.id, label: item.label });
+    });
+    
+    // 3. Tags (Envies)
+    filters.value.tags.forEach(id => {
+            const item = allTags.find(tag => tag.id === id);
+            if (item) labels.push({ type: 'tags', id: item.id, label: item.label });
+        });
+        return labels;
+      });
+
+
   // ACTIONS (équivalent de methods)
   function applyFilters(newFilters) {
     filters.value = newFilters;
@@ -44,5 +75,12 @@ export const useRestaurantStore = defineStore('restaurants', () => {
     filters.value = { cravings: [], cities: [], tags: [] };
   }
 
-  return { allRestaurants, filters, filteredRestaurants, applyFilters, resetFilters };
+  return { 
+      allRestaurants, 
+      filters, 
+      filteredRestaurants, 
+      selectedFilterLabels, // <--- EXPOSÉ pour l'App.vue
+      applyFilters, 
+      resetFilters 
+  };
 });

@@ -9,21 +9,12 @@ defineProps({
 </script>
 
 <template>
-  <div v-if="restaurants && restaurants.length > 0" id="grid_places">
-    <div v-for="restaurant in restaurants" v-bind:key="restaurant">
+  <div id="grid_places">
+    <div v-for="restaurant in restaurants" :key="restaurant.id">
       <RestaurantCard 
-        :key="restaurant.id" 
         :restaurant="restaurant" 
-        />
+      />
     </div>
-  </div>
-
-<div v-else class="no-results-message">
-    <span class="material-icons sad-icon">
-      sentiment_dissatisfied
-    </span>
-    <h2>Aucune adresse ne correspond aux filtres choisis.</h2>
-    <p>Veuillez essayer de modifier vos critères de recherche.</p>
   </div>
 </template>
 
@@ -34,26 +25,5 @@ defineProps({
   grid-gap: 10px;
   justify-content: center;
   text-align: center;
-}
-
-.no-results-message {
-  text-align: center;
-  padding: 20px;
-  margin-top: 30px;
-  border: 1px solid #ccc; /* Optionnel : pour mettre en évidence le message */
-  border-radius: 8px; /* Optionnel */
-  background-color: #f9f9f9; /* Optionnel */
-}
-
-.no-results-message h2 {
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.sad-icon {
-  font-size: 48px;
-  color: #007fff;
-  display: block;
-  margin: 0 auto 10px;
 }
 </style>

@@ -15,7 +15,7 @@
   font-family: "Cedarville Cursive", serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 7vw;
+  font-size: 5vw;
 }
 
 </style>

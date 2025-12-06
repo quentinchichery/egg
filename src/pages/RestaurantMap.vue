@@ -24,8 +24,8 @@
 </template>
 
 <script setup>
-import { cravingIcons } from '@/services/constants';
-import { onMounted, ref, shallowRef, watch } from 'vue'; // Import shallowRef
+import { cravingIcons, cravingColors } from '@/services/constants';
+import { onMounted, ref, shallowRef, watch } from 'vue';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Button } from '@/components/ui/button';
@@ -123,17 +123,21 @@ const locateUser = () => {
 
 // Function to update markers 
 const updateMarkers = (restaurantsToDisplay) => {
-  // Check if markersLayer exists
   if (!map.value || !markersLayer.value) return;
 
   markersLayer.value.clearLayers();
 
   restaurantsToDisplay.forEach(restaurant => {
     if (restaurant.lat != null && restaurant.long != null) {
-      // ... (your existing icon creation logic) ...
+      
+      // 2. Récupération de la couleur correspondante
+      // Si le type n'existe pas, on prend la couleur par défaut
+      const markerColor = cravingColors[restaurant.craving] || cravingColors.default;
+
+      // 3. Injection de la couleur dans le style HTML inline (background-color)
       const iconHtml = `
         <div class="custom-marker-icon">
-          <div class="icon-circle">
+          <div class="icon-circle" style="background-color: ${markerColor}; border-color: #ffffff">
             <img src="${cravingIcons[restaurant.craving] || cravingIcons.default}" alt="${restaurant.craving}" />
           </div>
         </div>
@@ -248,8 +252,8 @@ onMounted(() => {
 }
 
 :deep(.my-custom-leaflet-marker .icon-circle) {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   background-color: white;
   border-radius: 50%;
   display: flex;
@@ -266,6 +270,7 @@ onMounted(() => {
   width: 60%;
   height: 60%;
   object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 /* User location marker styles */

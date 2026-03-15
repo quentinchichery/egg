@@ -21,7 +21,7 @@ def export_to_json(csv_path: str, json_path: str) -> None:
     print(df.head())
 
     # find_coordonates
-    for idx, row in df.iterrows():
+    for idx, _ in df.iterrows():
         if pd.isna(df.loc[idx,'lat']) and pd.isna(df.loc[idx,'long']):
             lat, long = geocode_address(df.loc[idx,'addresse'])
             if lat != None and long != None:
@@ -31,7 +31,7 @@ def export_to_json(csv_path: str, json_path: str) -> None:
                     df.loc[idx,'long'] = long
             print(f"{df.loc[idx,'addresse']}: {df.loc[idx,'lat']}, {df.loc[idx,'long']} ")
             lat, long = None, None
-            time.sleep(0.1)
+            time.sleep(5)
         else:
             if (df.loc[idx,'lat'] > 49 or df.loc[idx,'lat'] < 48) and (df.loc[idx,'long'] > 3 or df.loc[idx,'long'] < 2):
                 print(df.loc[idx,'addresse'])
@@ -59,6 +59,6 @@ def export_to_json(csv_path: str, json_path: str) -> None:
     df.to_csv('processed-data.csv', sep=";", index=False, encoding="utf-8")
 
 if __name__ == "__main__":
-    csv_path = r"C:\Users\Quentin\Desktop\IT\potamApp\potam-app\src\api\egg-database - 31-01-2026.csv"
+    csv_path = r"C:\Users\Quentin\Desktop\IT\potamApp\potam-app\src\api\egg-database - 15-03-2026.csv"
     json_path = "../data/restaurants.json"
     export_to_json(csv_path, json_path)

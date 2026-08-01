@@ -14,6 +14,11 @@ dist
 dist-ssr
 *.local
 
+# vue-tsc / TypeScript build artifacts (should never be emitted with noEmit, kept as safety net)
+src/components/ui/**/*.js
+src/components/ui/**/*.js.map
+*.tsbuildinfo
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

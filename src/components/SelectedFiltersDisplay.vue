@@ -18,24 +18,25 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useRestaurantStore } from '@/stores/restaurantStore';
 import { Button } from '@/components/ui/button';
+import type { RestaurantFilters } from '@/types/types';
 // Assurez-vous d'avoir les Material Icons chargés dans votre index.html
 
 const restaurantStore = useRestaurantStore();
 
-const removeFilter = (filterToRemove) => {
-  const current = JSON.parse(JSON.stringify(restaurantStore.filters)); // Copie des filtres
-  
-  if (filterToRemove.type === 'cravings') {
-    current.cravings = current.cravings.filter(id => id !== filterToRemove.id);
-  } else if (filterToRemove.type === 'cities') {
-    current.cities = current.cities.filter(id => id !== filterToRemove.id);
-  } else if (filterToRemove.type === 'tags') {
-    current.tags = current.tags.filter(id => id !== filterToRemove.id);
-  }
-  
+interface SelectedFilterLabel {
+  type: keyof RestaurantFilters;
+  id: string;
+  label: string;
+}
+
+const removeFilter = (filterToRemove: SelectedFilterLabel) => {
+  const current: RestaurantFilters = JSON.parse(JSON.stringify(restaurantStore.filters)); // Copie des filtres
+
+  current[filterToRemove.type] = current[filterToRemove.type].filter((id) => id !== filterToRemove.id);
+
   restaurantStore.applyFilters(current);
 };
 </script>

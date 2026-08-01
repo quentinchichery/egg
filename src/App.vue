@@ -3,7 +3,7 @@
   <div id="app">
     <header>
       <Header/>
-        <div id="navigation" class="flex space-x-4">
+      <nav id="navigation" class="flex space-x-4">
         <router-link to="/grid" v-slot="{ isActive }">
           <Button :variant="isActive ? 'default' : 'outline'">
             <LayoutGrid class="w-4 h-4 mr-2" /> Grille
@@ -14,19 +14,20 @@
             <MapPinned class="w-4 h-4 mr-2" /> Carte
           </Button>
         </router-link>
-        </div>
+      </nav>
     </header>
 
     <main>
       <div class="app-container">
         <ModalComponent v-if="isMobile" :isOpen="isFilterOpen" @close="closeFilter">
-          <FilterComponent @filteredRestaurants="updatedRestaurants" @closeModal="closeFilter"/>
+          <FilterComponent @closeModal="closeFilter"/>
         </ModalComponent>
         <SidebarComponent v-if="!isMobile" class="sidebar" >
-          <FilterComponent @filteredRestaurants="updatedRestaurants" />
+          <FilterComponent instant-apply />
         </SidebarComponent>
         <div class="main-content">
           <SelectedFiltersDisplay />
+          <p class="results-count" aria-live="polite">{{ resultsCountLabel }}</p>
           <hr class="my-4" v-if="restaurantStore.selectedFilterLabels.length > 0" />
           <div v-if="restaurantStore.filteredRestaurants.length > 0" class="h-full">
             <router-view 
@@ -48,48 +49,24 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+import { useMediaQuery } from '@vueuse/core';
 import NoResultsDisplay from '@/components/NoResultsDisplay.vue';
 import SelectedFiltersDisplay from '@/components/SelectedFiltersDisplay.vue';
 import FilterComponent from '@/components/FilterComponent.vue';
 import ModalComponent from '@/components/ModalComponent.vue';
 import SidebarComponent from '@/components/SidebarComponent.vue';
-import { useRestaurantStore } from '@/stores/restaurantStore';
-import { ref, provide, onMounted, onBeforeUnmount } from 'vue';
 import Header from '@/components/Header.vue';
-import { Button } from '@/components/ui/button'
 import Footer from '@/components/Footer.vue';
-import restaurantService from '@/api/restaurantService';
-import {
-  navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu'
-import { MapPinned } from 'lucide-vue-next';
-import { LayoutGrid } from 'lucide-vue-next';
-import { Filter } from 'lucide-vue-next';
-import { useRoute } from 'vue-router';
+import { Button } from '@/components/ui/button';
+import { useRestaurantStore } from '@/stores/restaurantStore';
+import { MapPinned, LayoutGrid, Filter } from 'lucide-vue-next';
 
-const route = useRoute();
 const restaurantStore = useRestaurantStore();
 
-// Fisher-Yates shuffle algorithm
-const shuffleArray = (array) => {
-  const shuffledArray = [...array]; // Create a copy of the array
-  for (let i = shuffledArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
-  }
-  return shuffledArray;
-};
-
-const isModalOpen = ref(false);
-const formData = ref(null);
-
-const openModal = () => {
-  isModalOpen.value = true;
-};
-
+const isMobile = useMediaQuery('(max-width: 768px)');
 const isFilterOpen = ref(false);
-const isMobile = ref(false);
 
 function openFilter() {
   isFilterOpen.value = true;
@@ -99,19 +76,10 @@ function closeFilter() {
   isFilterOpen.value = false;
 }
 
-function checkScreenSize() {
-  isMobile.value = window.innerWidth <= 768; // Adjust the breakpoint as needed
-}
-
-onMounted(() => {
-  checkScreenSize();
-  window.addEventListener('resize', checkScreenSize);
+const resultsCountLabel = computed(() => {
+  const count = restaurantStore.filteredRestaurants.length;
+  return count > 1 ? `${count} adresses` : `${count} adresse`;
 });
-
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', checkScreenSize);
-});
-
 </script>
 
 <style>
@@ -136,6 +104,13 @@ a {
 .main-content {
   flex-grow: 1; /* Take up the remaining space */
   padding: 20px; /* Add some padding */
+}
+
+.results-count {
+  font-size: 0.85rem;
+  color: #64748b;
+  padding: 0 10px;
+  margin: 4px 0 0;
 }
 
 .filter-button {

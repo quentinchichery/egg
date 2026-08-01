@@ -1,225 +1,175 @@
 <template>
-      <form @submit.prevent="onSubmit">
-        <div class="flex items-center space-x-4 w-full">
-          <span class="text-lg font-bold flex-1 pl-4">Types</span>
-          <Button type="button" variant="ghost" size="icon" @click="setContentCravings">
-            <ChevronDown class="w-4 h-4" />
-          </Button>
-        </div>
-          <div v-show='contentVisibleCravings'>
-            <FormField name="cravings">
-              <FormItem>
-                <div class="flex flex-wrap justify-center space-x-1 space-y-1">
-                  <FormField
-                    v-for="craving in cravings"
-                    v-slot="{ value, handleChange }"
-                    :key="craving.id"
-                    type="checkbox"
-                    :value="craving.id"
-                    :unchecked-value="false"
-                    name="cravings"
-                  >
-                    <FormItem class="flex flex-row items-center space-x-3">
-                      <FormControl>
-                        <Toggle
-                          :pressed="value.includes(craving.id)"
-                          @update:pressed="handleChange"
-                        >
-                        <div class="flex items-center space-x-2 font-normal">
-                          <img :src="getIconForCraving(craving.id)" alt="" class="w-5 h-5" />
-                          <span>{{ craving.label }}</span>
-                        </div>
-                        </Toggle>
-                      </FormControl>
-                    </FormItem>
-                  </FormField>
-                </div>
-              </FormItem>
-            </FormField>
-          </div>
-        <Separator class="my-4" />
-        <div class="flex items-center space-x-4 w-full">
-          <span class="text-lg font-bold flex-1 pl-4">Quartiers</span>
-          <Button type="button" variant="ghost" size="icon" @click="setContentCities">
-            <ChevronDown class="w-4 h-4" />
-          </Button>
-        </div>
-          <div v-show='contentVisibleCities'>
-            <FormField name="cities">
-              <FormItem>
-                <div class="flex flex-wrap justify-center space-x-1 space-y-1">
-                  <FormField
-                    v-for="city in cities"
-                    v-slot="{ value, handleChange }"
-                    :key="city.id"
-                    type="checkbox"
-                    :value="city.id"
-                    :unchecked-value="false"
-                    name="cities"
-                  >
-                    <FormItem class="flex flex-row items-center space-x-3">
-                      <FormControl>
-                        <Toggle
-                          :pressed="value.includes(city.id)"
-                          @update:pressed="handleChange"
-                        >
-                        <div class="flex items-center space-x-2 font-normal">
-                          <span>{{ city.label }}</span>
-                        </div>
-                        </Toggle>
-                      </FormControl>
-                    </FormItem>
-                  </FormField>
-                </div>
-              </FormItem>
-            </FormField>
-        </div>
-        <Separator class="my-4" />
-        <div class="flex items-center space-x-4 w-full">
-          <span class="text-lg font-bold flex-1 pl-4">Envies</span>
-          <Button type="button" variant="ghost" size="icon" @click="setContentTags">
-            <ChevronDown class="w-4 h-4" />
-          </Button>
-        </div>
-          <div v-show='contentVisibleTags'>
-           <!-- <ScrollArea class="h-48 rounded-md " type="always"> -->
-              <FormField name="tags">
-                <FormItem>
-                  <div class="flex flex-wrap justify-center space-x-1 space-y-1">
-                    <FormField
-                      v-for="tag in tags"
-                      v-slot="{ value, handleChange }"
-                      :key="tag.id"
-                      type="checkbox"
-                      :value="tag.id"
-                      :unchecked-value="false"
-                      name="tags"
-                    >
-                      <FormItem class="flex flex-row items-center space-x-3">
-                        <FormControl>
-                          <Toggle
-                            :pressed="value.includes(tag.id)"
-                            @update:pressed="handleChange"
-                          >
-                          <div class="flex items-center space-x-2 font-normal">
-                            <span>{{ tag.label }}</span>
-                          </div>
-                          </Toggle>
-                        </FormControl>
-                      </FormItem>
-                    </FormField>
-                  </div>
-                </FormItem>
-              </FormField>
-          </div>
-        
-        <div class="flex items-center justify-between w-full">
-          <Button class="mt-3.5 ml-2" variant="ghost" @click="resetToggles">Effacer</Button>
-          <Button class="mt-3.5 mr-2 bg-blue-500" type="submit">Chercher</Button>
-        </div>
+  <div class="filter-component">
+    <div class="search-field">
+      <Search class="search-icon" aria-hidden="true" />
+      <input
+        v-model="searchInput"
+        type="search"
+        placeholder="Rechercher un nom, une adresse…"
+        aria-label="Rechercher une adresse par nom ou adresse"
+        class="search-input"
+      />
+    </div>
 
-      </form>
+    <FilterSection
+      title="Types"
+      :options="cravingOptions"
+      :model-value="localFilters.cravings"
+      with-separator
+      @update:model-value="updateCravings"
+    />
+    <FilterSection
+      title="Quartiers"
+      :options="cityOptions"
+      :model-value="localFilters.cities"
+      with-separator
+      @update:model-value="updateCities"
+    />
+    <FilterSection
+      title="Envies"
+      :options="tagOptions"
+      :model-value="localFilters.tags"
+      @update:model-value="updateTags"
+    />
 
+    <div class="flex items-center justify-between w-full">
+      <Button class="mt-3.5 ml-2" variant="ghost" type="button" @click="onReset">Effacer</Button>
+      <Button v-if="!instantApply" class="mt-3.5 mr-2 bg-blue-500" type="button" @click="onSubmit">
+        Chercher
+      </Button>
+    </div>
+  </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { onBeforeUnmount, reactive, ref, watch } from 'vue';
+import { Search } from 'lucide-vue-next';
 import restaurantService from '@/api/restaurantService';
 import { cravingIcons } from '@/services/constants';
-import { ChevronDown } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Toggle } from '@/components/ui/toggle';
-import { Separator } from '@/components/ui/separator';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { toTypedSchema } from '@vee-validate/zod';
-import { useForm } from 'vee-validate';
-import { h } from 'vue';
-import * as z from 'zod';
-import { ref, computed } from 'vue';
-import { watch } from 'vue';
+import FilterSection from '@/components/FilterSection.vue';
 import { useRestaurantStore } from '@/stores/restaurantStore';
+import type { RestaurantFilters } from '@/types/types';
+
+const props = withDefaults(defineProps<{ instantApply?: boolean }>(), {
+  instantApply: false,
+});
+const emit = defineEmits<{ closeModal: [] }>();
 
 const restaurantStore = useRestaurantStore();
 
-const cravings = restaurantService.localFetchCravings();
-const cities = restaurantService.localFetchCities();
-const tags = restaurantService.localFetchTags();
+const cravingOptions = restaurantService.localFetchCravings().map((craving) => ({
+  ...craving,
+  icon: cravingIcons[craving.id] ?? cravingIcons.default,
+}));
+const cityOptions = restaurantService.localFetchCities();
+const tagOptions = restaurantService.localFetchTags();
 
-const formSchema = toTypedSchema(
-  z.object({
-    cravings: z.array(z.string()),
-    cities: z.array(z.string()),
-    tags: z.array(z.string()),
-  })
-);
-
-// Récupération de `setValues` de useForm
-const { handleSubmit, resetForm, setValues } = useForm({
-  validationSchema: formSchema,
-  initialValues: {
-    cravings: [],
-    cities: [],
-    tags: []
-  },
-})
-
-const filteredRestaurants = ref([]);
-const emit = defineEmits(['filteredRestaurants', 'closeModal']);
-
-const restaurants = ref(restaurantService.localFetchRestaurants());
-
-const applyFilters = (values) => {
-  filteredRestaurants.value = restaurants.value.filter(item => {
-      const cravingMatches = values.cravings.length === 0 || values.cravings.includes(item.craving);
-      const cityMatches = values.cities.length === 0 || values.cities.includes(String(item.city));
-      const tagMatches = values.tags.length === 0 || item.tags.some(tag => values.tags.includes(tag));
-      return cravingMatches && cityMatches && tagMatches;
-    });
-  emit('filteredRestaurants', filteredRestaurants.value);
-  };
-
-const onSubmit = handleSubmit((values) => {
-  restaurantStore.applyFilters(values); // On appelle l'action du store
-  emit('closeModal');
+const localFilters = reactive<RestaurantFilters>({
+  cravings: [...restaurantStore.filters.cravings],
+  cities: [...restaurantStore.filters.cities],
+  tags: [...restaurantStore.filters.tags],
 });
 
-const resetToggles = () => {
-  resetForm(); // Ceci vient de vee-validate
-  restaurantStore.resetFilters(); // On reset aussi l'état dans le store
-};
+// Garde le formulaire synchronisé si les filtres changent ailleurs
+// (ex: suppression d'un tag depuis SelectedFiltersDisplay, ou reset).
+watch(
+  () => restaurantStore.filters,
+  (newFilters) => {
+    localFilters.cravings = [...newFilters.cravings];
+    localFilters.cities = [...newFilters.cities];
+    localFilters.tags = [...newFilters.tags];
+  },
+  { deep: true }
+);
 
-const contentVisibleCravings = ref(true);
-const contentVisibleCities = ref(true);
-const contentVisibleTags = ref(true);
+function applyIfInstant() {
+  if (props.instantApply) {
+    restaurantStore.applyFilters({
+      cravings: [...localFilters.cravings],
+      cities: [...localFilters.cities],
+      tags: [...localFilters.tags],
+    });
+  }
+}
 
-const setContentCravings = () => {
-  contentVisibleCravings.value = !contentVisibleCravings.value;
-};
-const setContentCities = () => {
-  contentVisibleCities.value = !contentVisibleCities.value;
-};
-const setContentTags = () => {
-  contentVisibleTags.value = !contentVisibleTags.value;
-};
+function updateCravings(value: string[]) {
+  localFilters.cravings = value;
+  applyIfInstant();
+}
 
-const getIconForCraving = (cravingId) => {
-  return cravingIcons[cravingId] || '/icons/default.png';
-};
+function updateCities(value: string[]) {
+  localFilters.cities = value;
+  applyIfInstant();
+}
 
-// 💡 NOUVEAU : Synchronisation du formulaire avec le store Pinia
-watch(() => restaurantStore.filters, (newFilters) => {
-    // setValues met à jour les champs du formulaire avec les nouvelles valeurs
-    setValues(newFilters, { force: true });
-}, { deep: true, immediate: true }); 
-// deep: true pour détecter les changements à l'intérieur de l'objet filters
-// immediate: true pour synchroniser l'état initial (si besoin)
+function updateTags(value: string[]) {
+  localFilters.tags = value;
+  applyIfInstant();
+}
 
+function onSubmit() {
+  restaurantStore.applyFilters({
+    cravings: [...localFilters.cravings],
+    cities: [...localFilters.cities],
+    tags: [...localFilters.tags],
+  });
+  emit('closeModal');
+}
+
+function onReset() {
+  localFilters.cravings = [];
+  localFilters.cities = [];
+  localFilters.tags = [];
+  restaurantStore.resetFilters();
+}
+
+// Recherche texte : toujours appliquée en direct (avec un léger debounce),
+// indépendamment du mode instantApply des autres filtres.
+const searchInput = ref(restaurantStore.searchQuery);
+let searchDebounceId: ReturnType<typeof setTimeout> | undefined;
+
+watch(searchInput, (value) => {
+  clearTimeout(searchDebounceId);
+  searchDebounceId = setTimeout(() => {
+    restaurantStore.setSearchQuery(value);
+  }, 200);
+});
+
+onBeforeUnmount(() => {
+  clearTimeout(searchDebounceId);
+});
 </script>
+
+<style scoped>
+.search-field {
+  position: relative;
+  padding: 0 12px 16px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 12px 8px 34px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007fff;
+  box-shadow: 0 0 0 2px rgba(0, 127, 255, 0.2);
+}
+</style>
+

@@ -3,7 +3,7 @@ import path from 'path';
 import autoprefixer from 'autoprefixer'
 import tailwind from 'tailwindcss'
 
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
 
 // https://vite.dev/config/
@@ -21,6 +21,10 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src'),
     }
+  },
+  test: {
+    environment: 'node',
+    globals: true,
   },
   build: {
     outDir: 'dist', // Ensure the output directory is set to 'dist'

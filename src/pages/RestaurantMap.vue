@@ -23,7 +23,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { cravingIcons, cravingColors } from '@/services/constants';
 import { onMounted, ref, shallowRef, watch } from 'vue';
 import L from 'leaflet';
@@ -31,32 +31,36 @@ import 'leaflet/dist/leaflet.css';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Navigation, Loader2, AlertCircle } from 'lucide-vue-next';
+import type { Restaurant } from '@/types/types';
 
-const props = defineProps({
-  restaurants: {
-    type: Array,
-    required: true
-  }
-});
+const props = defineProps<{ restaurants: Restaurant[] }>();
 
 // State
 // USE shallowRef FOR LEAFLET INSTANCES
-const map = shallowRef(null); 
-const markersLayer = shallowRef(null); 
-const userLocationMarker = shallowRef(null);
+const map = shallowRef<L.Map | null>(null);
+const markersLayer = shallowRef<L.LayerGroup | null>(null);
+const userLocationMarker = shallowRef<L.Marker | null>(null);
+// Marqueurs indexés par id de restaurant, pour ne (re)créer que ce qui a changé.
+const markersById = new Map<string, L.Marker>();
 
 // Standard refs for data/UI state
-const selectedRestaurant = ref(null);
-const markers = ref([]);
 const isLocating = ref(false);
 const locationError = ref('');
 
 watch(() => props.restaurants, (newRestaurants) => {
-  console.log('Restaurant list updated, redrawing markers...');
   if (map.value) {
     updateMarkers(newRestaurants);
   }
 });
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 // Function to locate user
 const locateUser = () => {
@@ -79,7 +83,7 @@ const locateUser = () => {
       const { latitude, longitude } = position.coords;
       
       if (userLocationMarker.value) {
-        map.value.removeLayer(userLocationMarker.value);
+        map.value?.removeLayer(userLocationMarker.value);
       }
 
       const userIcon = L.divIcon({
@@ -95,22 +99,20 @@ const locateUser = () => {
       });
 
       userLocationMarker.value = L.marker([latitude, longitude], { icon: userIcon })
-        .addTo(map.value)
+        .addTo(map.value!)
         .bindPopup('Votre position')
         .openPopup();
 
-      map.value.setView([latitude, longitude], 15);
+      map.value!.setView([latitude, longitude], 15);
       
       isLocating.value = false;
     },
     (error) => {
       isLocating.value = false;
-      // ... error handling logic ...
-      switch(error.code) {
+      switch (error.code) {
         case error.PERMISSION_DENIED:
           locationError.value = 'Autorisation de géolocalisation refusée.';
           break;
-        // ... other cases ...
         default:
           locationError.value = 'Erreur de géolocalisation.';
           break;
@@ -121,56 +123,76 @@ const locateUser = () => {
   );
 };
 
-// Function to update markers 
-const updateMarkers = (restaurantsToDisplay) => {
+// Crée un marqueur Leaflet pour un restaurant (icône colorée + popup lien Google Maps).
+function createMarker(restaurant: Restaurant): L.Marker {
+  const markerColor = cravingColors[restaurant.craving] || cravingColors.default;
+
+  const iconHtml = `
+    <div class="custom-marker-icon">
+      <div class="icon-circle" style="background-color: ${markerColor}; border-color: #ffffff">
+        <img src="${cravingIcons[restaurant.craving] || cravingIcons.default}" alt="${restaurant.craving}" />
+      </div>
+    </div>
+  `;
+
+  const markerIcon = L.divIcon({
+    className: 'my-custom-leaflet-marker',
+    html: iconHtml,
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30],
+  });
+
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    `${restaurant.name} ${restaurant.addresse}`
+  )}`;
+  const safeName = escapeHtml(restaurant.name);
+  // Le lien <a target="_blank"> (navigation utilisateur réelle) remplace un ancien
+  // window.open() sur un div, qui était bloqué/détourné par iOS (voir README/notes).
+  const popupContent = `
+    <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="custom-marker" aria-label="Ouvrir ${safeName} dans Google Maps">
+      <div class="title">${safeName}</div>
+      <img
+        src="restaurant_pictures/${restaurant.id}-400.jpg"
+        alt=""
+        loading="lazy"
+        decoding="async"
+        onerror="this.onerror=null;this.src='/egg.svg'"
+        class="popup-image"
+      />
+    </a>
+  `;
+
+  const marker = L.marker([restaurant.lat as number, restaurant.long as number], { icon: markerIcon });
+  marker.bindPopup(popupContent);
+  return marker;
+}
+
+// Réconcilie les marqueurs affichés avec la liste filtrée : n'ajoute que les
+// nouveaux restaurants et ne retire que ceux qui ont disparu, au lieu de tout
+// vider/reconstruire à chaque changement de filtre.
+const updateMarkers = (restaurantsToDisplay: Restaurant[]) => {
   if (!map.value || !markersLayer.value) return;
 
-  markersLayer.value.clearLayers();
+  const nextIds = new Set<string>();
 
-  restaurantsToDisplay.forEach(restaurant => {
-    if (restaurant.lat != null && restaurant.long != null) {
-      
-      // 2. Récupération de la couleur correspondante
-      // Si le type n'existe pas, on prend la couleur par défaut
-      const markerColor = cravingColors[restaurant.craving] || cravingColors.default;
+  restaurantsToDisplay.forEach((restaurant) => {
+    if (restaurant.lat == null || restaurant.long == null) return;
+    nextIds.add(restaurant.id);
 
-      // 3. Injection de la couleur dans le style HTML inline (background-color)
-      const iconHtml = `
-        <div class="custom-marker-icon">
-          <div class="icon-circle" style="background-color: ${markerColor}; border-color: #ffffff">
-            <img src="${cravingIcons[restaurant.craving] || cravingIcons.default}" alt="${restaurant.craving}" />
-          </div>
-        </div>
-      `;
-      
-      const markerIcon = L.divIcon({
-        className: 'my-custom-leaflet-marker', 
-        html: iconHtml,
-        iconSize: [30, 30],
-        iconAnchor: [15, 30],
-        popupAnchor: [0, -30],
-      });
-
-      const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(restaurant.name)}+${encodeURIComponent(restaurant.addresse)}`;
-      const popupContent = `
-        <div class="custom-marker" style="cursor: pointer;">
-          <div class="title">${restaurant.name}</div>
-          <img src="restaurant_pictures/${restaurant.id}.jpg" class="popup-image"/>
-        </div>
-      `;
-      
-      const marker = L.marker([restaurant.lat, restaurant.long], { icon: markerIcon });
-      
-      marker.bindPopup(popupContent).on('popupopen', (e) => {
-        const popupNode = e.popup.getElement().querySelector('.custom-marker');
-        if (popupNode) {
-          popupNode.addEventListener('click', () => window.open(googleSearchUrl, '_blank'));
-        }
-      });
-
-      markersLayer.value.addLayer(marker);
+    if (!markersById.has(restaurant.id)) {
+      const marker = createMarker(restaurant);
+      markersById.set(restaurant.id, marker);
+      markersLayer.value!.addLayer(marker);
     }
   });
+
+  for (const [id, marker] of markersById) {
+    if (!nextIds.has(id)) {
+      markersLayer.value!.removeLayer(marker);
+      markersById.delete(id);
+    }
+  }
 };
 
 const initializeMap = () => {
@@ -230,6 +252,8 @@ onMounted(() => {
   overflow: hidden;
   cursor: pointer;
   background-color: black;
+  text-decoration: none;
+  color: inherit;
 }
 
 :deep(.custom-marker img) {

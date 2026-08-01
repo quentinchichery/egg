@@ -1,11 +1,8 @@
-<script setup>
-import { Button } from '@/components/ui/button';
-import { useRouter } from 'vue-router';
+<script setup lang="ts">
 import RestaurantCard from '@/components/RestaurantCard.vue';
+import type { Restaurant } from '@/types/types';
 
-defineProps({
-  restaurants: Array,
-})
+defineProps<{ restaurants: Restaurant[] }>();
 </script>
 
 <template>

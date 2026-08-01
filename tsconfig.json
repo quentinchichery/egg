@@ -6,7 +6,8 @@
   // ],
   "compilerOptions": {
     // ...
-    "allowJs": true,
+    "allowJs": false,
+    "noEmit": true, // vue-tsc only type-checks here; Vite handles all transpilation/bundling
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
@@ -16,13 +17,10 @@
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
-    "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "skipLibCheck": true,
-    "outDir": "./dist", // Ensure the output directory is set to 'dist'
-    "rootDir": "./src"  // Ensure the root directory is set to 'src'
+    "skipLibCheck": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "exclude": ["node_modules", "dist"]

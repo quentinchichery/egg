@@ -6,11 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --ext .js,.ts,.vue",
+    "format": "prettier --write \"src/**/*.{ts,vue,css}\"",
+    "test": "vitest run"
   },
   "dependencies": {
-    "@tanstack/vue-table": "^8.21.3",
-    "@vee-validate/zod": "^4.14.6",
     "@vueuse/core": "^11.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -21,18 +22,24 @@
     "shadcn-vue": "^2.2.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
-    "vee-validate": "^4.14.6",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.14",
     "@types/node": "^22.8.1",
     "@vitejs/plugin-vue": "^5.1.4",
+    "@vue/eslint-config-typescript": "^13.0.0",
     "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.1",
+    "eslint-plugin-vue": "^9.29.0",
+    "jsdom": "^25.0.1",
+    "prettier": "^3.3.3",
     "tailwindcss": "^3.4.14",
     "typescript": "~5.6.2",
     "vite": "^5.4.9",
+    "vitest": "^2.1.4",
     "vue-tsc": "^2.1.10"
   }
 }

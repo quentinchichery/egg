@@ -10,18 +10,15 @@
       {{ restaurant.name }}
       <ExternalLink class="external-icon" aria-hidden="true" />
     </div>
-    <picture>
-      <source :srcset="`${basePicturePath}-400.webp`" type="image/webp" />
-      <img
-        :src="imageSrc"
-        :alt="restaurant.name"
-        loading="lazy"
-        decoding="async"
-        width="400"
-        height="400"
-        @error="onImageError"
-      />
-    </picture>
+    <img
+      :src="imageSrc"
+      :alt="restaurant.name"
+      loading="lazy"
+      decoding="async"
+      width="400"
+      height="400"
+      @error="onImageError"
+    />
   </a>
 </template>
 
@@ -32,11 +29,10 @@ import type { Restaurant } from '@/types/types';
 
 const props = defineProps<{ restaurant: Restaurant }>();
 
-const basePicturePath = computed(() => `restaurant_pictures/${props.restaurant.id}`);
 const hasError = ref(false);
 
 const imageSrc = computed(() =>
-  hasError.value ? '/egg.svg' : `${basePicturePath.value}-400.jpg`
+  hasError.value ? '/egg.svg' : `/restaurant_pictures/${props.restaurant.id}.jpg`
 );
 
 function onImageError() {

@@ -153,7 +153,7 @@ function createMarker(restaurant: Restaurant): L.Marker {
     <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="custom-marker" aria-label="Ouvrir ${safeName} dans Google Maps">
       <div class="title">${safeName}</div>
       <img
-        src="restaurant_pictures/${restaurant.id}-400.jpg"
+        src="/restaurant_pictures/${restaurant.id}.jpg"
         alt=""
         loading="lazy"
         decoding="async"

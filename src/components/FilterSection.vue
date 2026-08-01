@@ -1,6 +1,11 @@
 <template>
   <div class="flex items-center space-x-4 w-full">
-    <span class="text-lg font-bold flex-1 pl-4">{{ title }}</span>
+    <span class="text-lg font-bold flex-1 pl-4">
+      {{ title }}
+      <span v-if="modelValue.length > 0" class="ml-1 text-sm font-normal text-muted-foreground">
+        ({{ modelValue.length }})
+      </span>
+    </span>
     <Button
       type="button"
       variant="ghost"
@@ -43,18 +48,24 @@ export interface FilterSectionOption {
   icon?: string;
 }
 
-const props = defineProps<{
-  title: string;
-  options: FilterSectionOption[];
-  modelValue: string[];
-  withSeparator?: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    title: string;
+    options: FilterSectionOption[];
+    modelValue: string[];
+    withSeparator?: boolean;
+    defaultOpen?: boolean;
+  }>(),
+  {
+    defaultOpen: true,
+  }
+);
 
 const emit = defineEmits<{
   'update:modelValue': [value: string[]];
 }>();
 
-const isOpen = ref(true);
+const isOpen = ref(props.defaultOpen);
 
 function toggleOption(id: string) {
   const next = props.modelValue.includes(id)

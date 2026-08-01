@@ -20,7 +20,7 @@
     <main>
       <div class="app-container">
         <ModalComponent v-if="isMobile" :isOpen="isFilterOpen" @close="closeFilter">
-          <FilterComponent @closeModal="closeFilter"/>
+          <FilterComponent collapsed-by-default @closeModal="closeFilter"/>
         </ModalComponent>
         <SidebarComponent v-if="!isMobile" class="sidebar" >
           <FilterComponent instant-apply />

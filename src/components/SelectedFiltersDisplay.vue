@@ -1,9 +1,9 @@
 <template>
-  <div v-if="restaurantStore.selectedFilterLabels.length > 0" class="selected-filters-container">
+  <div v-if="labels.length > 0" class="selected-filters-container">
     <span class="font-semibold text-sm mr-2">Filtres appliqués :</span>
     
     <div 
-      v-for="filter in restaurantStore.selectedFilterLabels" 
+      v-for="filter in labels" 
       :key="filter.id + filter.type"
       class="filter-tag"
       @click="removeFilter(filter)"
@@ -12,19 +12,18 @@
       <span class="material-icons close-icon">close</span>
     </div>
     
-    <Button variant="link" class="clear-all-button" @click="restaurantStore.resetFilters()">
+    <Button variant="link" class="clear-all-button" @click="clearAll">
         Effacer tout
     </Button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useRestaurantStore } from '@/stores/restaurantStore';
 import { Button } from '@/components/ui/button';
 import type { RestaurantFilters } from '@/types/types';
 // Assurez-vous d'avoir les Material Icons chargés dans votre index.html
-
-const restaurantStore = useRestaurantStore();
 
 interface SelectedFilterLabel {
   type: keyof RestaurantFilters;
@@ -32,12 +31,41 @@ interface SelectedFilterLabel {
   label: string;
 }
 
+// Sans prop `filters`, le composant lit/écrit directement le store (usage historique,
+// filtres déjà appliqués). Avec `filters`, il devient contrôlé : il affiche les filtres
+// fournis (ex: filtres en cours d'édition dans la modale) et délègue les actions via events.
+const props = defineProps<{ filters?: RestaurantFilters }>();
+const emit = defineEmits<{
+  remove: [filter: SelectedFilterLabel];
+  clearAll: [];
+}>();
+
+const restaurantStore = useRestaurantStore();
+
+const labels = computed(() =>
+  props.filters ? restaurantStore.labelsFor(props.filters) : restaurantStore.selectedFilterLabels
+);
+
 const removeFilter = (filterToRemove: SelectedFilterLabel) => {
+  if (props.filters) {
+    emit('remove', filterToRemove);
+    return;
+  }
+
   const current: RestaurantFilters = JSON.parse(JSON.stringify(restaurantStore.filters)); // Copie des filtres
 
   current[filterToRemove.type] = current[filterToRemove.type].filter((id) => id !== filterToRemove.id);
 
   restaurantStore.applyFilters(current);
+};
+
+const clearAll = () => {
+  if (props.filters) {
+    emit('clearAll');
+    return;
+  }
+
+  restaurantStore.resetFilters();
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="filter-component">
-    <div class="search-field">
+  <div class="flex h-full min-h-0 flex-1 flex-col">
+    <div class="search-field shrink-0">
       <Search class="search-icon" aria-hidden="true" />
       <input
         v-model="searchInput"
@@ -11,48 +11,57 @@
       />
     </div>
 
-    <FilterSection
-      title="Types"
-      :options="cravingOptions"
-      :model-value="localFilters.cravings"
-      with-separator
-      @update:model-value="updateCravings"
-    />
-    <FilterSection
-      title="Quartiers"
-      :options="cityOptions"
-      :model-value="localFilters.cities"
-      with-separator
-      @update:model-value="updateCities"
-    />
-    <FilterSection
-      title="Envies"
-      :options="tagOptions"
-      :model-value="localFilters.tags"
-      @update:model-value="updateTags"
-    />
+    <div class="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3">
+      <SelectedFiltersDisplay :filters="localFilters" @remove="removeSelectedFilter" @clear-all="onReset" />
 
-    <div class="flex items-center justify-between w-full">
-      <Button class="mt-3.5 ml-2" variant="ghost" type="button" @click="onReset">Effacer</Button>
-      <Button v-if="!instantApply" class="mt-3.5 mr-2 bg-blue-500" type="button" @click="onSubmit">
-        Chercher
+      <FilterSection
+        title="Types"
+        :options="cravingOptions"
+        :model-value="localFilters.cravings"
+        :default-open="!collapsedByDefault"
+        with-separator
+        @update:model-value="updateCravings"
+      />
+      <FilterSection
+        title="Quartiers"
+        :options="cityOptions"
+        :model-value="localFilters.cities"
+        :default-open="!collapsedByDefault"
+        with-separator
+        @update:model-value="updateCities"
+      />
+      <FilterSection
+        title="Envies"
+        :options="tagOptions"
+        :model-value="localFilters.tags"
+        :default-open="!collapsedByDefault"
+        @update:model-value="updateTags"
+      />
+    </div>
+
+    <div class="flex shrink-0 items-center justify-between w-full border-t px-1 pt-3 pb-[max(0.875rem,env(safe-area-inset-bottom))]">
+      <Button class="ml-2" variant="ghost" type="button" @click="onReset">Effacer</Button>
+      <Button v-if="!instantApply" class="mr-2 bg-blue-500" type="button" @click="onSubmit">
+        Chercher ({{ matchingCount }})
       </Button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, reactive, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, reactive, ref, watch } from 'vue';
 import { Search } from 'lucide-vue-next';
 import restaurantService from '@/api/restaurantService';
 import { cravingIcons } from '@/services/constants';
 import { Button } from '@/components/ui/button';
 import FilterSection from '@/components/FilterSection.vue';
+import SelectedFiltersDisplay from '@/components/SelectedFiltersDisplay.vue';
 import { useRestaurantStore } from '@/stores/restaurantStore';
 import type { RestaurantFilters } from '@/types/types';
 
-const props = withDefaults(defineProps<{ instantApply?: boolean }>(), {
+const props = withDefaults(defineProps<{ instantApply?: boolean; collapsedByDefault?: boolean }>(), {
   instantApply: false,
+  collapsedByDefault: false,
 });
 const emit = defineEmits<{ closeModal: [] }>();
 
@@ -108,6 +117,11 @@ function updateTags(value: string[]) {
   applyIfInstant();
 }
 
+function removeSelectedFilter(filter: { type: keyof RestaurantFilters; id: string }) {
+  localFilters[filter.type] = localFilters[filter.type].filter((id) => id !== filter.id);
+  applyIfInstant();
+}
+
 function onSubmit() {
   restaurantStore.applyFilters({
     cravings: [...localFilters.cravings],
@@ -139,6 +153,19 @@ watch(searchInput, (value) => {
 onBeforeUnmount(() => {
   clearTimeout(searchDebounceId);
 });
+
+// Nombre de résultats que donneraient les filtres actuellement édités (avant validation),
+// affiché sur le bouton "Chercher" pour prévisualiser l'effet du filtrage.
+const matchingCount = computed(() =>
+  restaurantStore.countMatching(
+    {
+      cravings: localFilters.cravings,
+      cities: localFilters.cities,
+      tags: localFilters.tags,
+    },
+    searchInput.value
+  )
+);
 </script>
 
 <style scoped>

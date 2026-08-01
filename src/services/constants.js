@@ -8,10 +8,10 @@ export const cravingIcons = {
 };
 
 export const cravingColors = {
-  cafe: "#C7F9CC",     // Orange foncé/Brique
-  bar: '#80ED99',      // Violet profond
-  commerce: '#38A3A5', // Bleu soutenu
-  table: '#22577A',    // Vert forêt
-  pouce: '#57CC99',    // Orange vif (type "fast food")
+  cafe: "#E2F1AF",     // Orange foncé/Brique
+  bar: '#E3D888',      // Violet profond
+  commerce: '#31231E', // Bleu soutenu
+  table: '#84714F',    // Vert forêt
+  pouce: '#5A3A31',    // Orange vif (type "fast food")
   default: '#141204',  // Gris bleuté foncé
 };

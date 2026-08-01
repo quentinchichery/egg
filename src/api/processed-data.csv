@@ -720,7 +720,7 @@ id;lat;long;name;city;craving;tags;addresse
 1536;48.8564959;2.3595474;Hohoho;75004;cafe;nan;18 Rue Ferdinand Duval, 75004 Paris
 1537;48.8710169;2.3630262;La Chocolaterie William Artigue;75010;commerce;chocolatier;30 Rue Yves Toudic, 75010 Paris
 1538;48.8943828;2.3432239;L'amic;75018;table;neobistrot;16 Rue Letort, 75018 Paris
-1539;48.9013312;2.3716537;le Café du 19M;75019;cafe;nan;2 Place Skanderbeg, 75019 Paris
+1539;48.9013312;2.3716537;le Café du 19M;75019;cafe;coeur;2 Place Skanderbeg, 75019 Paris
 1540;48.878941;2.385151;Gilou;75019;table;neobistrot;9 Rue du Tunnel, 75019 Paris
 1541;48.8540797;2.3659063;eme restaurant;75004;table;neobistrot;4 Impasse Guéménée, 75004 Paris
 1542;48.8583587;2.3849892;Patine Bistrot;75011;table;neobistrot;16 Rue la Vacquerie, 75011 Paris
@@ -735,3 +735,24 @@ id;lat;long;name;city;craving;tags;addresse
 1551;48.8823198;2.3331151;Spécimen Burger Pigalle;75009;pouce;burger;25 Rue de Douai, 75009 Paris
 1552;48.8621272;2.3739241;Acid Lactic;75011;table;italien/coeur;15 Rue de la Folie Méricourt, 75011 Paris
 1553;48.8669778;2.3612183;Midnight Club;75003;pouce;dwich;5 Rue Notre Dame de Nazareth, 75003 Paris
+1554;48.89478302001953;2.3917763233184814;Bidou;75019;pouce;dwich;Parc de La Villette, Allée du Canal, 75019 Paris
+1555;48.8492263;2.3749743;Johny Dwich;75012;pouce;dwich;1 Rue Emilio Castelar, 75012 Paris
+1556;48.8872523;2.3546351;La Fa Brick - Myrha;75018;pouce;orient/dwich;20 Rue Myrha, 75018 Paris
+1557;48.8909938;2.3521626;La Fa Brick - Ordener;75018;pouce;orient/dwich;49 Rue Ordener, 75018 Paris
+1558;48.8806586;2.3738436;MERSIN - Döner Taverna;75019;pouce;orient/dwich;123 Avenue Simon Bolivar, 75019 Paris
+1559;48.8625334;2.3799298;Sandwichette;75011;pouce;dwich;52 Rue Saint-Maur, 75011 Paris
+1560;48.8718292;2.3668805;Babz;75010;pouce;dwich;7 Rue Marie et Louise, 75010 Paris
+1561;48.872084;2.3803952;FAMI La cantine réunionnaise;75020;table;nan;39 bis Rue de Tourtille, 75020 Paris
+1562;48.8353411;2.2923435;HITONIGIRI;75015;pouce;japonais;360 Rue de Vaugirard, 75015 Paris
+1563;48.8668625;2.3521686;Kuisinistan;75002;pouce;orient/dwich;37 Rue de Palestro, 75002 Paris
+1564;48.8792777;2.3370643;Hallyu Kitchen;75009;table;asiatique;6 Rue Henry Monnier, 75009 Paris
+1565;48.8590813;2.3762214;MAD - Maker Artisanal Dough;75011;pouce;italien;36 Rue Popincourt, 75011 Paris
+1566;48.8673776;2.332871;Cody's Bagels & Coffee Shop;75001;pouce;nan;8 Rue Gomboust, 75001 Paris
+1567;48.8641614;2.3499343;DIMDAN MAIDAN;75002;table;asiatique;21 Rue de Turbigo, 75002 Paris
+1568;48.8672595;2.3754754;SUPERETTE;75011;pouce;burger;63 Rue Jean-Pierre Timbaud, 75011 Paris
+1569;48.8734704;2.3834826;Miett;75020;pouce;dwich/coeur;68 Rue de Belleville, 75020 Paris
+1570;48.873225;2.3813562;PASTARD;75019;table;italien;53 Rue de Belleville, 75019 Paris
+1571;48.8482199;2.3260148;BALHYO;75006;table;asiatique;39 Rue Saint-Placide, 75006 Paris
+1572;48.8545656;2.3719522;DKR;75011;table;africain;19 Rue de la Roquette, 75011 Paris
+1573;48.8683817;2.3725628;AYA PIZZETTA;75011;table;italien;2 Rue Deguerry, 75011 Paris
+1574;48.8661505;2.3717284;BMK Folie-Bamako;75011;table;africain;40 Rue Jean-Pierre Timbaud, 75011 Paris

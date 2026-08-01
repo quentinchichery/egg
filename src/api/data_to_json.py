@@ -59,6 +59,6 @@ def export_to_json(csv_path: str, json_path: str) -> None:
     df.to_csv('processed-data.csv', sep=";", index=False, encoding="utf-8")
 
 if __name__ == "__main__":
-    csv_path = r"C:\Users\Quentin\Desktop\IT\potamApp\potam-app\src\api\egg-database - 15-03-2026.csv"
+    csv_path = r"C:\Users\Quentin\Desktop\IT\potamApp\potam-app\src\api\egg-database - 01-08-2026.csv"
     json_path = "../data/restaurants.json"
     export_to_json(csv_path, json_path)

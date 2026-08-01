@@ -41,7 +41,7 @@ const map = shallowRef<L.Map | null>(null);
 const markersLayer = shallowRef<L.LayerGroup | null>(null);
 const userLocationMarker = shallowRef<L.Marker | null>(null);
 // Marqueurs indexés par id de restaurant, pour ne (re)créer que ce qui a changé.
-const markersById = new Map<string, L.Marker>();
+const markersById = new Map<number, L.Marker>();
 
 // Standard refs for data/UI state
 const isLocating = ref(false);
@@ -174,7 +174,7 @@ function createMarker(restaurant: Restaurant): L.Marker {
 const updateMarkers = (restaurantsToDisplay: Restaurant[]) => {
   if (!map.value || !markersLayer.value) return;
 
-  const nextIds = new Set<string>();
+  const nextIds = new Set<number>();
 
   restaurantsToDisplay.forEach((restaurant) => {
     if (restaurant.lat == null || restaurant.long == null) return;

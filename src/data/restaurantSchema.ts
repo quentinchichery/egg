@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const restaurantSchema = z.object({
-  id: z.string(),
+  id: z.number(),
   name: z.string(),
   lat: z.number().nullable(),
   long: z.number().nullable(),

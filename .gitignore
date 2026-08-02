@@ -1,4 +1,6 @@
-.venv
+# Python
+.venv/
+__pycache__/
 
 # Logs
 logs

@@ -1,7 +1,7 @@
 <template>
   <div class=header>
     <h1 id="header_title">soft boiled egg club</h1>
-    <p>nos adresses pariennes préférées</p>
+    <p>our favourite Paris spots</p>
   </div>
 </template>
 
@@ -15,7 +15,7 @@
   font-family: "Cedarville Cursive", serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 5vw;
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
 }
 
 </style>

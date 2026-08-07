@@ -3,8 +3,8 @@
     <span class="material-icons sad-icon">
       sentiment_dissatisfied
     </span>
-    <h2>Aucune adresse ne correspond aux filtres choisis.</h2>
-    <p>Veuillez essayer de modifier vos critères de recherche.</p>
+    <h2>No spot matches the selected filters.</h2>
+    <p>Try adjusting your search criteria.</p>
   </div>
 </template>
 

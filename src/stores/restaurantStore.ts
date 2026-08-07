@@ -81,6 +81,12 @@ export const useRestaurantStore = defineStore('restaurants', () => {
   // Permet d'obtenir les labels des filtres pour l'affichage
   const selectedFilterLabels = computed<SelectedFilterLabel[]>(() => labelsForFilters(filters.value));
 
+  // Les adresses les plus récemment ajoutées, basées sur l'id le plus élevé.
+  // Lit la source non mélangée (restaurantService) car `allRestaurants` est shuffled à l'init.
+  function getNewestRestaurants(count = 6): Restaurant[] {
+    return [...restaurantService.localFetchRestaurants()].sort((a, b) => b.id - a.id).slice(0, count);
+  }
+
   // ACTIONS (équivalent de methods)
   function applyFilters(newFilters: RestaurantFilters) {
     filters.value = newFilters;
@@ -116,6 +122,7 @@ export const useRestaurantStore = defineStore('restaurants', () => {
     searchQuery,
     filteredRestaurants,
     selectedFilterLabels,
+    getNewestRestaurants,
     applyFilters,
     resetFilters,
     setSearchQuery,

@@ -11,7 +11,7 @@
     >
       <Navigation v-if="!isLocating" class="w-4 h-4 mr-2" />
       <Loader2 v-else class="w-4 h-4 mr-2 animate-spin" />
-      {{ isLocating ? 'Localisation...' : 'Me localiser' }}
+      {{ isLocating ? 'Locating…' : 'Locate me' }}
     </Button>
 
     <Alert v-if="locationError" class="error-alert" variant="destructive">
@@ -65,7 +65,7 @@ function escapeHtml(value: string): string {
 // Function to locate user
 const locateUser = () => {
   if (!navigator.geolocation) {
-    locationError.value = 'La géolocalisation n\'est pas supportée par ce navigateur.';
+    locationError.value = 'Geolocation is not supported by this browser.';
     return;
   }
 
@@ -100,7 +100,7 @@ const locateUser = () => {
 
       userLocationMarker.value = L.marker([latitude, longitude], { icon: userIcon })
         .addTo(map.value!)
-        .bindPopup('Votre position')
+        .bindPopup('Your location')
         .openPopup();
 
       map.value!.setView([latitude, longitude], 15);
@@ -111,10 +111,10 @@ const locateUser = () => {
       isLocating.value = false;
       switch (error.code) {
         case error.PERMISSION_DENIED:
-          locationError.value = 'Autorisation de géolocalisation refusée.';
+          locationError.value = 'Location permission denied.';
           break;
         default:
-          locationError.value = 'Erreur de géolocalisation.';
+          locationError.value = 'Geolocation error.';
           break;
       }
       setTimeout(() => { locationError.value = ''; }, 5000);
@@ -294,7 +294,6 @@ onMounted(() => {
   width: 60%;
   height: 60%;
   object-fit: contain;
-  filter: brightness(0) invert(1);
 }
 
 /* User location marker styles */

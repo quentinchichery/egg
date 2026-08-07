@@ -8,10 +8,10 @@ export const cravingIcons: Record<string, string> = {
 };
 
 export const cravingColors: Record<string, string> = {
-  cafe: "#E2F1AF",     // Orange foncé/Brique
-  bar: '#E3D888',      // Violet profond
-  commerce: '#31231E', // Bleu soutenu
-  table: '#84714F',    // Vert forêt
-  pouce: '#5A3A31',    // Orange vif (type "fast food")
-  default: '#141204',  // Gris bleuté foncé
+  cafe: '#F3D9B1',     // Pastel caramel
+  bar: '#F6AFA0',      // Pastel coral
+  commerce: '#A7D8DE', // Pastel sky blue
+  table: '#B7E4C7',    // Pastel mint green
+  pouce: '#FCE38A',    // Pastel yellow
+  default: '#D3C4E3',  // Pastel lavender
 };

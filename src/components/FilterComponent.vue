@@ -5,8 +5,8 @@
       <input
         v-model="searchInput"
         type="search"
-        placeholder="Rechercher un nom, une adresse…"
-        aria-label="Rechercher une adresse par nom ou adresse"
+        placeholder="Search a name, an address…"
+        aria-label="Search a spot by name or address"
         class="search-input"
       />
     </div>
@@ -23,7 +23,7 @@
         @update:model-value="updateCravings"
       />
       <FilterSection
-        title="Quartiers"
+        title="Neighbourhoods"
         :options="cityOptions"
         :model-value="localFilters.cities"
         :default-open="!collapsedByDefault"
@@ -31,7 +31,7 @@
         @update:model-value="updateCities"
       />
       <FilterSection
-        title="Envies"
+        title="Cravings"
         :options="tagOptions"
         :model-value="localFilters.tags"
         :default-open="!collapsedByDefault"
@@ -40,9 +40,9 @@
     </div>
 
     <div class="flex shrink-0 items-center justify-between w-full border-t px-1 pt-3 pb-[max(0.875rem,env(safe-area-inset-bottom))]">
-      <Button class="ml-2" variant="ghost" type="button" @click="onReset">Effacer</Button>
+      <Button class="ml-2" variant="ghost" type="button" @click="onReset">Clear</Button>
       <Button v-if="!instantApply" class="mr-2 bg-blue-500" type="button" @click="onSubmit">
-        Chercher ({{ matchingCount }})
+        Search ({{ matchingCount }})
       </Button>
     </div>
   </div>
@@ -171,7 +171,8 @@ const matchingCount = computed(() =>
 <style scoped>
 .search-field {
   position: relative;
-  padding: 0 12px 16px;
+  padding: 0 12px;
+  margin-bottom: 16px;
 }
 
 .search-icon {

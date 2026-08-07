@@ -1,6 +1,6 @@
 <template>
   <div v-if="labels.length > 0" class="selected-filters-container">
-    <span class="font-semibold text-sm mr-2">Filtres appliqués :</span>
+    <span class="font-semibold text-sm mr-2">Active filters:</span>
     
     <div 
       v-for="filter in labels" 
@@ -13,7 +13,7 @@
     </div>
     
     <Button variant="link" class="clear-all-button" @click="clearAll">
-        Effacer tout
+        Clear all
     </Button>
   </div>
 </template>

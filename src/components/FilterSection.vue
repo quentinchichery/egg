@@ -11,7 +11,7 @@
       variant="ghost"
       size="icon"
       :aria-expanded="isOpen"
-      :aria-label="isOpen ? `Masquer le filtre ${title}` : `Afficher le filtre ${title}`"
+      :aria-label="isOpen ? `Hide ${title} filter` : `Show ${title} filter`"
       @click="isOpen = !isOpen"
     >
       <ChevronDown class="w-4 h-4" />

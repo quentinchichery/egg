@@ -4,7 +4,7 @@
     target="_blank"
     rel="noopener noreferrer"
     class="thumbnail"
-    :aria-label="`Ouvrir ${restaurant.name} dans Google Maps (nouvel onglet)`"
+    :aria-label="`Open ${restaurant.name} in Google Maps (new tab)`"
   >
     <div class="caption">
       {{ restaurant.name }}
